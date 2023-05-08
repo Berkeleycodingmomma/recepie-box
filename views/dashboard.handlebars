@@ -1,0 +1,18 @@
+<main class="container mt-5">
+  <div class="row">
+    <div class="col-12">
+      <h1 class="mb-4">Dashboard</h1>
+      <a href="/newpost" class="btn btn-primary">Create a New Blog Post</a>
+    </div>
+  </div>
+  <br>
+  <h1 class="mb-4">Life in the Saddle: Tales and Tips from an Equestrian Enthusiast</h1>
+  {{#each posts}}
+    <div class="post-container post mb-3">
+      <h2><a href="/post/{{id}}" class="text-decoration-none text-reset">{{title}}</a></h2>
+      <p>Created by: {{user.username}} | Date: {{format_date createdAt}}</p>
+      <a href="/editpost/{{id}}" class="btn btn-warning">Edit Post</a>
+      <button class="btn btn-danger delete-post" data-post-id="{{id}}">Delete</button>
+    </div>
+  {{/each}}
+</main>

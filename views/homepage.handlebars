@@ -1,0 +1,19 @@
+<main class="container mt-5">
+  <h1 class="mb-4 text-white">Life in the Saddle: Tales and Tips from an Equestrian Enthusiast</h1>
+  <div class="row">
+    {{#each posts}}
+      <div class="col-md-4">
+        <div class="card mb-3">
+          <div class="card-header bg-warning">
+            <h2 class="card-title">
+              <a href="/post/{{id}}" class="text-dark">{{title}}</a>
+            </h2>
+          </div>
+          <div class="card-body text-dark">
+            <p>Created by: {{user.username}} Date: {{format_date createdAt}}</p>
+          </div>
+        </div>
+      </div>
+    {{/each}}
+  </div>
+</main>

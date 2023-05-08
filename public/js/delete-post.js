@@ -1,7 +1,7 @@
-//Below I added an event listener for deleting posts 
+//Below I added an event listener for deleting recipes 
 
-const deletePost = async (post_id) => {
-    const response = await fetch(`/api/posts/${post_id}`, {
+const deleteRecipe = async (recipe_id) => {
+    const response = await fetch(`/api/recipes/${recipe_id}`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
     });
@@ -9,15 +9,15 @@ const deletePost = async (post_id) => {
     if (response.ok) {
         document.location.reload(); 
       } else {
-        alert("Failed to delete the post."); 
+        alert("Failed to delete the recipe."); 
       }
     };
 
-    const deletePostHandler = (event) => {
-        if (event.target.matches(".delete-post")) {
-          const post_id = event.target.getAttribute("data-post-id");
-          deletePost(post_id);
+    const deleteRecipeHandler = (event) => {
+        if (event.target.matches(".delete-recipe")) {
+          const recipe_id = event.target.getAttribute("data-recipe-id");
+          deleteRecipe(recipe_id);
         }
       };
       
-      document.addEventListener("click", deletePostHandler);
+      document.addEventListener("click", deleteRecipeHandler);

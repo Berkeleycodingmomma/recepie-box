@@ -2,7 +2,7 @@ Constrouter = require("express").Router();
 const { Post, User, Comment } = require("../../models");
 const withAuth = require("../../utils/auth");
 
-// Below gets all posts with associated username
+// Below gets all Recipes with associated username
 router.get("/", async (req, res) => {
   try {
     const postData = await Post.findAll({
@@ -14,7 +14,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-//This gets one post by Id w/ asociated username and comments
+//This gets one  by Id w/ asociated username and comments
 router.get("/:id", async (req, res) => {
     try {
       const postData = await Post.findByPk(req.params.id, {
@@ -27,7 +27,7 @@ router.get("/:id", async (req, res) => {
         ],
       });
       if (!postData) {
-        res.status(404).json({ message: "No post found with that id!" });
+        res.status(404).json({ message: "No recipe found with that id!" });
         return;
       }
       res.status(200).json(postData);
@@ -36,7 +36,7 @@ router.get("/:id", async (req, res) => {
     }
   });
 
-  //This creates a new post with auth user
+  //This creates a new recipe with auth user
   router.post("/", withAuth, async (req, res) => {
     try {
       const newPost = await Post.create({
@@ -49,7 +49,7 @@ router.get("/:id", async (req, res) => {
     }
   });
 
-  // This updates an existing post with authenticated user
+  // This updates an existing  with authenticated user
 router.put("/:id", withAuth, async (req, res) => {
     try {
       const updatedPost = await Post.update(req.body, {
@@ -57,7 +57,7 @@ router.put("/:id", withAuth, async (req, res) => {
       });
   
       if (!updatedPost) {
-        res.status(404).json({ message: "No post found with that id!" });
+        res.status(404).json({ message: "No recipe found with that id!" });
         return;
       }
       res.status(200).json(updatedPost);
@@ -66,10 +66,10 @@ router.put("/:id", withAuth, async (req, res) => {
     }
   });
 
-//This deletes a post with autho user
+//This deletes a recipe with autho user
   router.delete("/:id", withAuth, async (req, res) => {
     try {
-      // Delete all comments related to the post
+      // Delete all comments related to the recipe
       await Comment.destroy({
         where: { post_id: req.params.id },
       });
@@ -79,7 +79,7 @@ router.put("/:id", withAuth, async (req, res) => {
       });
   
       if (!deletedPost) {
-        res.status(404).json({ message: "No post found with that id!" });
+        res.status(404).json({ message: "No recipe found with that id!" });
         return;
       }
       res.status(200).json(deletedPost);

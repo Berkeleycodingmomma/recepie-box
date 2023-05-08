@@ -1,6 +1,6 @@
 const { User } = require("../models");
 
-//Below are blog post userData examples for demo
+//Below are blog recipe userData examples for demo
 const userData = [
 
     {

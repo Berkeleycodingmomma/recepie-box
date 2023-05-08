@@ -1,5 +1,5 @@
 //This is the signup request
-const equineSignupFormHandler = async (event) => {
+const recipeSignupFormHandler = async (event) => {
     event.preventDefault();
 
     const username = document.querySelector('#username').value.trim();
@@ -8,7 +8,7 @@ const equineSignupFormHandler = async (event) => {
 
     if (username && email && password) {
         const response = await fetch('/api/users/signup', {
-            method: 'POST',
+            method: 'RECIPE',
             body: JSON.stringify({
                 username,
                 email,
@@ -29,7 +29,7 @@ const equineSignupFormHandler = async (event) => {
 };
 
 //Added event listners
-const equineSignupForm = document.querySelector('#signup-form');
-if (equineSignupForm) {
-    equineSignupForm.addEventListener('submit', equineSignupFormHandler);
+const recipeSignupForm = document.querySelector('#signup-form');
+if (recipeSignupForm) {
+    recipeSignupForm.addEventListener('submit', recipeSignupFormHandler);
 }

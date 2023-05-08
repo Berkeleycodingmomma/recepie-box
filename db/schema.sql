@@ -1,0 +1,2 @@
+DROP DATABASE IF EXISTS Amanda_EquineBlog;
+CREATE DATABASE Amanda_EquineBlog;

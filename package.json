@@ -1,0 +1,34 @@
+{
+  "name": "cms-style-mvc-tech-blog",
+  "version": "1.0.0",
+  "description": "I have built a CMS-style blog site similar to a Wordpress site, where developers can publish their blog posts and comment on other developers’ posts as well. This site was built completely from scratch and deployed to Heroku. This project follows the MVC paradigm in its architectural structure, using Handlebars.js as the templating language, Sequelize as the ORM, and the express-session npm package for authentication. # ## Visual image of the terminal after generating a .svg logo through the command-line #",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "seed": "node seeds/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Berkeleycodingmomma/cms-style-mvc-tech-blog.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Berkeleycodingmomma/cms-style-mvc-tech-blog/issues"
+  },
+  "homepage": "https://github.com/Berkeleycodingmomma/cms-style-mvc-tech-blog#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "connect-session-sequelize": "^7.1.6",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-handlebars": "^7.0.7",
+    "express-session": "^1.17.3",
+    "handlebars": "^4.7.6",
+    "mysql2": "^3.3.0",
+    "sequelize": "^6.29.3"
+  },
+  "devDependencies": {}
+}

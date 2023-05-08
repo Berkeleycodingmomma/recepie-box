@@ -1,16 +1,16 @@
-const newEquineCommentFormHandler = async (event) => {
+const newRecipeCommentFormHandler = async (event) => {
     event.preventDefault();
 
-    const post_id = parseInt(window.location.pathname.split('/').pop());
+    const recipe_id = parseInt(window.location.pathname.split('/').pop());
 
-    const content = document.querySelector('#content-new-equine-comment').value.trim();
+    const content = document.querySelector('#content-new-recipe-comment').value.trim();
 
     if (content) {
         const response = await fetch(`/api/comments`, {
-            method: 'POST',
+            method: 'RECIPE',
             body: JSON.stringify({
                 comment_text: content,
-                post_id
+                recipe_id
             }),
             headers: {
                 'Content-Type': 'application/json'
@@ -28,8 +28,8 @@ const newEquineCommentFormHandler = async (event) => {
 };
 
 //Below is the event listners
-const newEquineCommentForm = document.querySelector('.new-equine-comment-form');
-if (newEquineCommentForm) {
+const newRecipeCommentForm = document.querySelector('.new-recipe-comment-form');
+if (newRecipeCommentForm) {
 
-    newEquineCommentForm.addEventListener('submit', newEquineCommentFormHandler);
+    newRecipeCommentForm.addEventListener('submit', newRecipeCommentFormHandler);
 }

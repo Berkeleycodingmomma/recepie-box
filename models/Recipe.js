@@ -36,7 +36,7 @@ Recipe.init(
     timestamps: true,
     freezeTableName: true,
     underscored: true,
-    modelName: "post",
+    modelName: "recipe",
   }
 );
 

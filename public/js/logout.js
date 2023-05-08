@@ -1,7 +1,7 @@
 //Below is the logout function to send request to log out the user
-const equineLogout = async () => {
+const recipeLogout = async () => {
     const response = await fetch('/api/users/logout', {
-        method: 'POST',
+        method: 'RECIPE',
         headers: {
             'Content-Type': 'application/json'
         },
@@ -16,7 +16,7 @@ const equineLogout = async () => {
 };
 
 //I added an event listner to the logout button
-const equineLogoutButton = document.querySelector('#equine-logout');
-if (equineLogoutButton) {
-    equineLogoutButton.addEventListener('click', equineLogout);
+const recipeLogoutButton = document.querySelector('#recipe-logout');
+if (recipeLogoutButton) {
+    recipeLogoutButton.addEventListener('click', recipeLogout);
 }

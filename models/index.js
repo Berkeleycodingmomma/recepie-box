@@ -5,7 +5,7 @@ const Comment = require("./Comment");
 const Favorite = require("./Favorite")
 
 // Below I am the relationships between the models
-User.hasMany(Post, {
+User.hasMany(Recipe, {
     foreignKey: "user_id", // foreign key relationship
   });
   
@@ -17,17 +17,20 @@ User.hasMany(Post, {
     foreignKey: "user_id", //foreign key relationship
   });
   
-  Comment.belongsTo(Post, {
-    foreignKey: "post_id", // foreign key relationship
+  Comment.belongsTo(Recipe, {
+    foreignKey: "recipe_id", // foreign key relationship
   });
   
   Recipe.hasMany(Comment, {
     foreignKey: "post_id", //foreign key relationship
+
+    foreignKey: "recipe_id", //foreign key relationship
   });
   
   User.hasMany(Comment, {
     foreignKey: "user_id", // foreign key relationship
   });
+
  
   module.exports = { User, Recipe, Comment, Favorite };
   

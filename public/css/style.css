@@ -1,8 +1,8 @@
-.post-container {
+.recipe-container {
     transition: background-color 0.3s;
   }
   
-  .post-container:hover {
+  .recipe-container:hover {
     border-right: 1em solid #656565;
     background-color: rgba(126, 126, 126, 0.2);
     border-radius: 0.5em;

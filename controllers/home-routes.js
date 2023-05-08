@@ -1,7 +1,7 @@
 //Below I am importing necessary packages and models
 const router = require("express").Router();
 const {
-    Post,
+    Recipe,
     User,
     Comment
 } = require("../models");
@@ -10,20 +10,20 @@ const withAuth = require("../utils/auth");
 // Route to render homepage
 router.get("/", async (req, res) => {
     try {
-        // Find all posts with associated usernames
-        const postData = await Post.findAll({
+        // Find all recipe's with associated usernames
+        const recipeData = await Recipe.findAll({
             include: [{
                 model: User,
                 attributes: ["username"]
             }],
         });
-        // Convert post data to plain JavaScript object
-        const posts = postData.map((post) => post.get({
+        // Convert recipe data to plain JavaScript object
+        const recipes = recipeData.map((recipe) => recipe.get({
             plain: true
         }));
-        // Render homepage template with posts and login status
+        // Render homepage template with recipes and login status
         res.render("homepage", {
-            posts,
+            recipes,
             logged_in: req.session.logged_in,
         });
     } catch (err) {
@@ -31,11 +31,11 @@ router.get("/", async (req, res) => {
     }
 });
 
-// Route to render individual post page
-router.get("/post/:id", withAuth, async (req, res) => {
+// Route to render individual recipe page
+router.get("/recipe/:id", withAuth, async (req, res) => {
     try {
-        // Find post by ID with associated username and comments with associated usernames
-        const postData = await Post.findByPk(req.params.id, {
+        // Find recipe by ID with associated username and comments with associated usernames
+        const recipeData = await Recipe.findByPk(req.params.id, {
             include: [{
                     model: User,
                     attributes: ["username"]
@@ -49,12 +49,12 @@ router.get("/post/:id", withAuth, async (req, res) => {
                 },
             ],
         });
-        // Convert post data to plain JavaScript object and render post templates with post data and login status
-        const post = postData.get({
+        // Convert recipe data to plain JavaScript object and render recipe templates with recipe data and login status
+        const recipe = recipeData.get({
             plain: true
         });
-        res.render("post", {
-            ...post,
+        res.render("recipe", {
+            ...recipe,
             logged_in: req.session.logged_in,
         });
     } catch (err) {
@@ -62,10 +62,10 @@ router.get("/post/:id", withAuth, async (req, res) => {
     }
 });
 
-// Route to render dashboard page with all posts by current user then finding all posts by current user with associated usernames
+// Route to render dashboard page with all recipes by current user then finding all recipes by current user with associated usernames
 router.get("/dashboard", withAuth, async (req, res) => {
     try {
-        const postData = await Post.findAll({
+        const recipeData = await Recipe.findAll({
             where: {
                 user_id: req.session.user_id
             },
@@ -74,13 +74,13 @@ router.get("/dashboard", withAuth, async (req, res) => {
                 attributes: ["username"]
             }],
         });
-        // Convert post data to plain JavaScript object
-        const posts = postData.map((post) => post.get({
+        // Convert recipe data to plain JavaScript object
+        const recipes = recipeData.map((recipe) => recipe.get({
             plain: true
         }));
 
         res.render("dashboard", {
-            posts,
+            recipes,
             logged_in: req.session.logged_in,
         });
     } catch (err) {
@@ -101,20 +101,20 @@ router.get("/signup", (req, res) => {
     }
     res.render("signup");
 });
-//render the new post page
-router.get("/newpost", (req, res) => {
+//render the new recipe page
+router.get("/newrecipe", (req, res) => {
     if (req.session.logged_in) {
-        res.render("newpost");
+        res.render("newrecipe");
         return;
     }
     res.redirect("/login");
 });
 
 
-//render the edit post page
-router.get("/editpost/:id", async (req, res) => {
+//render the edit recipe page
+router.get("/editrecipe/:id", async (req, res) => {
     try {
-        const postData = await Post.findByPk(req.params.id, {
+        const recipeData = await Recipe.findByPk(req.params.id, {
             include: [{
                     model: User,
                     attributes: ["username"]
@@ -129,12 +129,12 @@ router.get("/editpost/:id", async (req, res) => {
             ],
         });
 
-        const post = postData.get({
+        const recipe = recipeData.get({
             plain: true
         });
 
-        res.render("editpost", {
-            ...post,
+        res.render("editrecipe", {
+            ...recipe,
             logged_in: req.session.logged_in,
         });
     } catch (err) {

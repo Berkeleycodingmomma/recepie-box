@@ -1,7 +1,7 @@
 
 //Below importing the seed data functions 
 const seedUsers = require("./userData");
-const seedPosts = require("./postData");
+const seedRecipes = require("./recipeData");
 const seedComments = require("./commentData");
 
 const sequelize = require('../config/connection');
@@ -12,7 +12,7 @@ await sequelize.sync({ force: true });
 
 // Calling each of the seed data functions
 await seedUsers();
-await seedPosts();
+await seedRecipes();
 await seedComments();
 
 // Exiting the process with a successful exit code

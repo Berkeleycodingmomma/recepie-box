@@ -1,4 +1,4 @@
-{{!-- views/post.handlebars file --}}
+{{!-- views/recipe.handlebars file --}}
 <main class="container mt-5">
   <article>
     <h1>{{title}}</h1>
@@ -6,12 +6,12 @@
     <p>{{content}}</p>
   </article>
   {{#if logged_in}}
-    <form class="new-equine-comment-form" class="mb-3">
+    <form class="new-recipe-comment-form" class="mb-3">
       <div class="mb-3">
         <label for="comment" class="form-label">Add Comment:</label>
         <textarea
           class="form-control"
-          id="content-new-equine-comment"
+          id="content-new-recipe-comment"
           rows="3"
           placeholder="Add a comment..."
         ></textarea>

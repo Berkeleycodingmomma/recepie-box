@@ -1,14 +1,15 @@
 // Below I am importing the necessary models
 const User = require("./User");
-const Post = require("./Recipe");
+const Recipe = require("./Recipe");
 const Comment = require("./Comment");
+const Favorite = require("./Favorite")
 
 // Below I am the relationships between the models
 User.hasMany(Post, {
     foreignKey: "user_id", // foreign key relationship
   });
   
-  Post.belongsTo(User, {
+  Recipe.belongsTo(User, {
     foreignKey: "user_id", // foreign key relationship
   });
   
@@ -20,7 +21,7 @@ User.hasMany(Post, {
     foreignKey: "post_id", // foreign key relationship
   });
   
-  Post.hasMany(Comment, {
+  Recipe.hasMany(Comment, {
     foreignKey: "post_id", //foreign key relationship
   });
   
@@ -28,5 +29,5 @@ User.hasMany(Post, {
     foreignKey: "user_id", // foreign key relationship
   });
  
-  module.exports = { User, Post, Comment };
+  module.exports = { User, Recipe, Comment, Favorite };
   

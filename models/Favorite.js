@@ -1,9 +1,9 @@
 const { Model, DataTypes } = require("sequelize");
 const sequelize = require("../config/connection");
 
-class Recipe extends Model {}
-
-Recipe.init(
+class Favorite extends Model {}
+//Below I am defining the structure and properties of the Comment object.
+Favorite.init(
   {
     id: {
       type: DataTypes.INTEGER,
@@ -11,18 +11,14 @@ Recipe.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    name: {
+    userID: {  //foreign key
       type: DataTypes.STRING,
       allowNull: false,
-    },
-    calories: {
-      type: DataTypes.INTEGER,
-      allowNull: true,
       validate: {
         len: [1],
       },
     },
-    spoonid: {
+    user_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
@@ -30,14 +26,22 @@ Recipe.init(
         key: "id",
       },
     },
+    Spoon_ID: { //foreign key
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      references: {
+        model: "post",
+        key: "id",
+      },
+    },
   },
   {
-    sequelize,
-    timestamps: true,
-    freezeTableName: true,
-    underscored: true,
-    modelName: "post",
+  sequelize,
+  timestamps: true,
+  freezeTableName: true,
+  underscored: true,
+  modelName: "comment",
   }
-);
-
-module.exports = Recipe;
+  );
+  
+  module.exports = Favorite;

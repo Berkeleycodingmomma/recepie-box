@@ -11,7 +11,7 @@ Favorite.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    userID: {  //foreign key
+    user_id: {  //foreign key
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
@@ -26,11 +26,11 @@ Favorite.init(
         key: "id",
       },
     },
-    Spoon_ID: { //foreign key
+    recipe_id: { //foreign key
       type: DataTypes.INTEGER,
       allowNull: true,
       references: {
-        model: "post",
+        model: "Recipe",
         key: "id",
       },
     },

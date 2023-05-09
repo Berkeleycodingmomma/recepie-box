@@ -19,10 +19,9 @@ Recipe.init(
       type: DataTypes.INTEGER,
       allowNull: true,
       validate: {
-        len: [1],
       },
     },
-    spoonid: {
+    user_id: { //foreign key
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {

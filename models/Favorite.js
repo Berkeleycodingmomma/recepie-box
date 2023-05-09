@@ -1,8 +1,9 @@
 const { Model, DataTypes } = require("sequelize");
 const sequelize = require("../config/connection");
 
+
 class Favorite extends Model {}
-//Below I am defining the structure and properties of the Favorite object.
+
 Favorite.init(
   {
     id: {
@@ -17,25 +18,30 @@ Favorite.init(
       references: {
         model: "user",
         key: "id",
+
+        unique: false
+
       },
     },
     recipe_id: { //foreign key
       type: DataTypes.INTEGER,
       allowNull: true,
-    },
-    spoon_id:{
-    type: DataTypes.INTEGER,
-      allowNull: false,
+      references: {
+        model: 'recipe',
+        key: 'id',
+        unique: false
+      }
+
     }
   },
 
   {
-  sequelize,
-  timestamps: true,
-  freezeTableName: true,
-  underscored: true,
-  modelName: "recipe",
+    sequelize,
+    timestamps: true,
+    freezeTableName: true,
+    underscored: true,
+    modelName: "favorite",
   }
-  );
-  
-  module.exports = Favorite;
+);
+
+module.exports = Favorite;

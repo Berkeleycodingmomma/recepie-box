@@ -1,0 +1,8 @@
+<h1>Found Recepies</h1>
+<ul>
+  {{#each recipies as |recipe|}}
+  <li>
+    {{> recipe-info recipe}}
+  </li>
+  {{/each}}
+</ul>

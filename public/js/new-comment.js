@@ -7,7 +7,7 @@ const newRecipeCommentFormHandler = async (event) => {
 
     if (content) {
         const response = await fetch(`/api/comments`, {
-            method: 'RECIPE',
+            method: 'POST',
             body: JSON.stringify({
                 comment_text: content,
                 recipe_id

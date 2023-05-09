@@ -1,7 +1,7 @@
 const { Model, DataTypes } = require("sequelize");
 const sequelize = require("../config/connection");
 
-class Recipe extends Model {}
+class Recipe extends Model { }
 
 Recipe.init(
   {
@@ -17,17 +17,16 @@ Recipe.init(
     },
     calories: {
       type: DataTypes.INTEGER,
-      allowNull: true,
-      validate: {
-      },
+      allowNull: true
     },
-    user_id: { //foreign key
+    picture_source: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    spoon_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      references: {
-        model: "user",
-        key: "id",
-      },
+
     },
   },
   {

@@ -1,48 +1,45 @@
 .recipe-container {
-    transition: background-color 0.3s;
-  }
-  
-  .recipe-container:hover {
-    border-right: 1em solid #656565;
-    background-color: rgba(126, 126, 126, 0.2);
-    border-radius: 0.5em;
-  }
-  
-  body {
-    background-image: url('/public/images/horse\ and\ saddle\ pic\ 3.jpg');
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: cover;
-  }
-  
-  
-  /* Responsive Features */
-  
-  @media screen and (min-width: 768px) {
-  }
-  
-  @media screen and (min-width: 768px) and (max-width: 1024px) {
-    /* CSS styles for tablets in landscape mode */
-  }
-  
-  @media screen and (max-width: 767px) and (orientation: portrait) {
-    /* CSS styles for tablets in portrait mode */
-  }
-  
-  @media screen and (max-width: 767px) {
-    /* CSS styles for smartphones */
-  }
-  
-  @media screen and (min-width: 1200px) {
-    /* CSS styles for large desktop screens */
-  }
-  
-  @media only screen and (-webkit-min-device-pixel-ratio: 2),
-         only screen and (min-resolution: 192dpi) {
-    /* CSS styles for high-resolution displays */
-  }
-  
-  @media (color-gamut: srgb) {
-    /* CSS styles for screens with an sRGB color gamut */
-  }
-  
+  transition: background-color 0.3s;
+}
+
+.recipe-container:hover {
+  border-right: 1em solid #656565;
+  background-color: rgba(126, 126, 126, 0.2);
+  border-radius: 0.5em;
+}
+
+body {
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+
+/* Responsive Features */
+
+@media screen and (min-width: 768px) {}
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  /* CSS styles for tablets in landscape mode */
+}
+
+@media screen and (max-width: 767px) and (orientation: portrait) {
+  /* CSS styles for tablets in portrait mode */
+}
+
+@media screen and (max-width: 767px) {
+  /* CSS styles for smartphones */
+}
+
+@media screen and (min-width: 1200px) {
+  /* CSS styles for large desktop screens */
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2),
+only screen and (min-resolution: 192dpi) {
+  /* CSS styles for high-resolution displays */
+}
+
+@media (color-gamut: srgb) {
+  /* CSS styles for screens with an sRGB color gamut */
+}

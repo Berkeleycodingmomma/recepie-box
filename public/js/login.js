@@ -2,13 +2,13 @@
 const recipeLoginFormHandler = async (event) => {
     event.preventDefault();
 
-    const username = document.querySelector('#username-recipe-login').value.trim();
-    const password = document.querySelector('#password-recipe-login').value.trim();
-
+    const username = document.querySelector('#username-login').value.trim();
+    const password = document.querySelector('#password-login').value.trim();
+    console.log(username);
+    console.log(password);
     if (username && password) {
-        // Below I am sending a RECIPE request to the login endpoint with the input values as JSON data
         const response = await fetch('/api/users/login', {
-            method: 'Recipe',
+            method: 'POST',
             body: JSON.stringify({
                 username,
                 password
@@ -19,7 +19,7 @@ const recipeLoginFormHandler = async (event) => {
         });
 
         if (response.ok) {
-            document.location.replace('/');
+            document.location.replace('/dashboard');
         } else {
             // If the request was unsuccessful, show an alert
             alert('Failed to log in.');
@@ -28,7 +28,7 @@ const recipeLoginFormHandler = async (event) => {
 };
 
 //Below is the event listner for the recipe login form
-const recipeLoginForm = document.querySelector('.recipe-login-form');
+const recipeLoginForm = document.querySelector('.login-form');
 if (recipeLoginForm) {
     recipeLoginForm.addEventListener('submit', recipeLoginFormHandler);
 }

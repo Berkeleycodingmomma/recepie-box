@@ -1,34 +1,29 @@
 
-//Below creating a new recipe 
-const newRecipeFormHandler = async (event) => {
-    event.preventDefault();
+const cuisineList = document.getElementById('cuisine-list');
 
-    const title = document.querySelector('#title-new-recipe').value.trim();
-    const content = document.querySelector('#content-new--recipe').value.trim();
+cuisineList.addEventListener('click', async function (event) {
+    const clickedListItem = event.target;
 
-    if (title && content) {
-        const response = await fetch('/api/recipes', {
-            method: 'RECIPE',
+
+    if (clickedListItem.tagName === 'li') {
+        const response = await fetch('/recipes', {
+            method: 'POST',
             body: JSON.stringify({
-                title,
-                content
+                cuisine: clickedListItem.textContent.substring(0, clickedListItem.textContent.length - 1)
             }),
             headers: {
                 'Content-Type': 'application/json'
             },
         });
 
-        // When successful, load the dashboard page
         if (response.ok) {
-            document.location.replace('/dashboard');
+            // Reload the page to show the new comment
+            document.location.reload();
         } else {
-            alert('Failed to create a new recipe.'); // When unsuccessful, show alert
+            // Display an alert with the error message
+            alert(response.statusText);
         }
     }
-};
 
-//Added event listners
-const newRecipeForm = document.querySelector('.new--recipe-form');
-if (newRecipeForm) {
-    newRecipeForm.addEventListener('submit', newRecipeFormHandler);
-}
+
+});

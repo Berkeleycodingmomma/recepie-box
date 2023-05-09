@@ -3,15 +3,13 @@ const recipeSignupFormHandler = async (event) => {
     event.preventDefault();
 
     const username = document.querySelector('#username').value.trim();
-    const email = document.querySelector('#email').value.trim();
     const password = document.querySelector('#password').value.trim();
 
-    if (username && email && password) {
+    if (username && password) {
         const response = await fetch('/api/users/signup', {
-            method: 'RECIPE',
+            method: 'POST',
             body: JSON.stringify({
                 username,
-                email,
                 password
             }),
             headers: {
@@ -21,7 +19,7 @@ const recipeSignupFormHandler = async (event) => {
 
         // When successful, load the homepage
         if (response.ok) {
-            document.location.replace('/');
+            document.location.replace('/dashboard');
         } else {
             alert('Failed to sign up.'); // When unsuccessful, show alert
         }

@@ -5,7 +5,6 @@ const { User } = require("../../models");
 
 //route to sign up new user
 router.post("/signup", async (req, res) => {
-  console.log("I am here");
   try {
     const newUser = new User();
     newUser.username = req.body.username;
@@ -28,7 +27,6 @@ router.post("/signup", async (req, res) => {
 
 //  route to log in a user
 router.post("/login", async (req, res) => {
-  console.log("I am logging in");
   try {
     const userData = await User.findOne({ where: { username: req.body.username } });
 

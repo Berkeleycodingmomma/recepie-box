@@ -26,6 +26,7 @@ Recipe.init(
     spoon_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
+
     },
   },
   {

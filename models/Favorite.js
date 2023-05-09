@@ -1,7 +1,8 @@
 const { Model, DataTypes } = require("sequelize");
 const sequelize = require("../config/connection");
 
-class Favorite extends Model { }
+
+class Favorite extends Model {}
 
 Favorite.init(
   {
@@ -17,7 +18,9 @@ Favorite.init(
       references: {
         model: "user",
         key: "id",
+
         unique: false
+
       },
     },
     recipe_id: { //foreign key
@@ -28,6 +31,7 @@ Favorite.init(
         key: 'id',
         unique: false
       }
+
     }
   },
 

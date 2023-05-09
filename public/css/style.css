@@ -16,7 +16,7 @@
 
 .container {
   font-family: cursive;
-  color:  #c2040b;
+  color: #c2040b;
   font-size: 40x;
 }
 
@@ -37,6 +37,17 @@ body {
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+.heart-button {
+  background-color: #ff4d4d;
+  color: white;
+  padding: 10px 40px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
 }
 
 

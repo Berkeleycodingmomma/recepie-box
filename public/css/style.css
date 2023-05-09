@@ -14,10 +14,11 @@
   font-size: 90px;
 }
 
-.container {
+h1 {
   font-family: cursive;
-  color:  #c2040b;
+  color: #c2040b;
   font-size: 40x;
+
 }
 
 h5 {
@@ -33,11 +34,10 @@ h6 {
 }
 
 body {
-  background: linear-gradient(to left, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%), 
+  background: linear-gradient(to left, rgba(255, 255, 255, 0) 0%, rgb(213 181 146) 100%), 
               url(./images/dish.png) center center no-repeat;
   background-size: cover;
 }
-
 
 /* Responsive Features */
 

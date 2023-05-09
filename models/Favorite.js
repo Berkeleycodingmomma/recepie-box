@@ -2,7 +2,7 @@ const { Model, DataTypes } = require("sequelize");
 const sequelize = require("../config/connection");
 
 class Favorite extends Model {}
-//Below I am defining the structure and properties of the Comment object.
+//Below I am defining the structure and properties of the Favorite object.
 Favorite.init(
   {
     id: {
@@ -10,10 +10,6 @@ Favorite.init(
       allowNull: false,
       primaryKey: true,
       autoIncrement: true,
-    },
-    user_id: {  
-      type: DataTypes.STRING,
-      allowNull: false,
     },
     user_id: {
       type: DataTypes.INTEGER,

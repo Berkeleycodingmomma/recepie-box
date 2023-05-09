@@ -8,7 +8,32 @@
   border-radius: 0.5em;
 }
 
+.navbar-brand {
+  color: #e3d48d;
+  font-family: cursive;
+  font-size: 90px;
+}
+
+.container {
+  font-family: cursive;
+  color:  #c2040b;
+  font-size: 40x;
+}
+
+h5 {
+  color: #e3d48d;
+  font-family: cursive;
+  font-size: 15px;
+}
+
+h6 {
+  color: #e3d48d;
+  font-family: cursive;
+  font-size: 15px;
+}
+
 body {
+  background-image: url(./images/dish.png);
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;

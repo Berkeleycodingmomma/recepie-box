@@ -11,19 +11,19 @@ Recipe.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    title: {
+    name: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    content: {
-      type: DataTypes.TEXT,
-      allowNull: false,
+    calories: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
       validate: {
-        len: [1],
       },
     },
-    user_id: {
+    user_id: { //foreign key
       type: DataTypes.INTEGER,
+      allowNull: false,
       references: {
         model: "user",
         key: "id",

@@ -2,8 +2,7 @@
 const router = require("express").Router();
 const {
     Recipe,
-    User,
-    Comment
+    User
 } = require("../models");
 const withAuth = require("../utils/auth");
 

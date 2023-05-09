@@ -1,19 +1,32 @@
-<main class="container mt-5">
-  <h1 class="mb-4 text-white">Recipe Box</h1>
-  <div class="row">
-    {{#each recipes}}
-      <div class="col-md-4">
-        <div class="card mb-3">
-          <div class="card-header bg-warning">
-            <h2 class="card-title">
-              <a href="/recipe/{{id}}" class="text-dark">{{title}}</a>
-            </h2>
-          </div>
-          <div class="card-body text-dark">
-            <p>Created by: {{user.username}} Date: {{format_date createdAt}}</p>
-          </div>
-        </div>
-      </div>
-    {{/each}}
-  </div>
-</main>
+<div class="container mt-5">
+  <h1>Choose a cuisine:</h1>
+  <ul id="cuisine-list">
+    <li>African 🌍</li>
+    <li>American 🇺🇸</li>
+    <li>British 🇬🇧</li>
+    <li>Cajun 🍤</li>
+    <li>Caribbean 🏝️</li>
+    <li>Chinese 🥢</li>
+    <li>Eastern European 🏰</li>
+    <li>European 🌍</li>
+    <li>French 🥐</li>
+    <li>German 🥨</li>
+    <li>Greek 🇬🇷</li>
+    <li>Indian 🍛</li>
+    <li>Irish 🍀</li>
+    <li>Italian 🍝</li>
+    <li>Japanese 🍣</li>
+    <li>Jewish 🕎</li>
+    <li>Korean 🇰🇷</li>
+    <li>Latin American 🌎</li>
+    <li>Mediterranean 🌿</li>
+    <li>Mexican 🌮</li>
+    <li>Middle Eastern 🌍</li>
+    <li>Nordic ❄️</li>
+    <li>Southern 🍗</li>
+    <li>Spanish 🇪🇸</li>
+    <li>Thai 🌶️</li>
+    <li>Vietnamese 🍜</li>
+  </ul>
+
+</div>

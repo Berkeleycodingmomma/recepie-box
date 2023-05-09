@@ -1,61 +1,46 @@
+// Import required modules
+const express = require('express');
+const sequelize = require('./config/connection');
+const path = require('path');
+const routes = require('./controllers');
+const exphbs = require('express-handlebars');
+const session = require('express-session');
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
+const helpers = require('./utils/helper');
+require('dotenv').config();
 
-//Below I have 
-const express = require("express");
-const session = require("express-session");
-const SequelizeStore = require("connect-session-sequelize")(session.Store);
-const routes = require("./controllers");
-const sequelize = require("./config/connection");
-const exphbs = require("express-handlebars");
-const hbs = exphbs.create({ helpers: require("./utils/helper")});
-
-
-//Creating express app and setting port
+// Create Express application
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-//Setting up session obj. w/ secret, cookie, and store
+// Configure session
 const sess = {
-    secret: 'Super secret secret',
-    cookie: {},
+    secret: 'super secret session', // Secret key for session encryption
+    cookie: { maxAge: 3600000 }, // Cookie configuration (expires in 1 hour)
     resave: false,
     saveUninitialized: true,
     store: new SequelizeStore({
-        db: sequelize,
-    }),
+        db: sequelize // Store session data in the Sequelize database
+    })
 };
 
-//Here we are using middleware w/ session obj.
-app.use(session(sees));
+// Configure Handlebars as the view engine
+const hbs = exphbs.create({ helpers }); // Create an instance of Handlebars with custom helpers
+app.engine('handlebars', hbs.engine);
+app.set('view engine', 'handlebars');
 
-//parsing json and URL encoded data
+// Middleware
 app.use(express.json());
-app.use(express.urlencoded({
-    extended: true
-}));
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, 'public')));
 
-//Below we are serving static files images from public dir. 
-app.use(express.static("public"));
-app.engine("handlebars", hbs.engine);
-app.set("view engine", "handlebars");
+// Set up session middleware
+app.use(session(sess));
 
-
-
-//Middleware w/ different obj.
-app.use(
-    session({
-        secret: process.env.SECRET,
-        store: new SequelizeStore({
-            db: sequelize
-        }),
-        resave: false,
-        saveUninitialized: false,
-
-    })
-);
-
+// Set up routes
 app.use(routes);
 
-//Syncing seq. models w/ database and starting server
-sequilize.sync({ force: false }).then(() => {
-    app.listen(PPORT, () => console.log(`Listening on PORT ${PORT}`));
+// Sync Sequelize models and start the server
+sequelize.sync({ force: false }).then(() => {
+    app.listen(PORT, () => console.log(`Now listening on ${PORT}`));
 });

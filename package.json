@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/Berkeleycodingmomma/cms-style-mvc-tech-blog#readme",
   "dependencies": {
+    "bcrypt": "^5.1.0",
     "bcryptjs": "^2.4.3",
     "connect-session-sequelize": "^7.1.6",
     "dotenv": "^16.0.3",
@@ -29,6 +30,5 @@
     "handlebars": "^4.7.6",
     "mysql2": "^3.3.0",
     "sequelize": "^6.29.3"
-  },
-  "devDependencies": {}
+  }
 }

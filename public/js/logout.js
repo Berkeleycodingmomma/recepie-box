@@ -1,7 +1,7 @@
 //Below is the logout function to send request to log out the user
 const recipeLogout = async () => {
     const response = await fetch('/api/users/logout', {
-        method: 'RECIPE',
+        method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },

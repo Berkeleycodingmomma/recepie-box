@@ -1,9 +1,9 @@
 const { Model, DataTypes } = require("sequelize");
 const sequelize = require("../config/connection");
 
-class Recipe extends Model { }
+class Favorite extends Model { }
 
-Recipe.init(
+Favorite.init(
   {
     id: {
       type: DataTypes.INTEGER,
@@ -11,30 +11,33 @@ Recipe.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    name: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    calories: {
+    user_id: {
       type: DataTypes.INTEGER,
-      allowNull: true
+      allowNull: false,
+      references: {
+        model: "user",
+        key: "id",
+        unique: false
+      },
     },
-    picture_source: {
-      type: DataTypes.STRING,
+    recipe_id: { //foreign key
+      type: DataTypes.INTEGER,
       allowNull: true,
-    },
-    spoon_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
+      references: {
+        model: 'recipe',
+        key: 'id',
+        unique: false
+      }
+    }
   },
+
   {
     sequelize,
     timestamps: true,
     freezeTableName: true,
     underscored: true,
-    modelName: "recipe",
+    modelName: "favorite",
   }
 );
 
-module.exports = Recipe;
+module.exports = Favorite;

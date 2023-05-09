@@ -14,7 +14,6 @@
   font-size: 90px;
 }
 
-
 h1 {
   font-family: cursive;
   color: #c2040b;
@@ -35,12 +34,10 @@ h6 {
 }
 
 body {
-  background-image: url(./images/dish.png);
-  background-position: center center;
-  background-repeat: no-repeat;
+  background: linear-gradient(to left, rgba(255, 255, 255, 0) 0%, rgb(213 181 146) 100%), 
+              url(./images/dish.png) center center no-repeat;
   background-size: cover;
 }
-
 
 /* Responsive Features */
 

@@ -1,3 +1,5 @@
+const axios = require('axios');
+
 require('dotenv').config();
 API_KEY = process.env.API_KEY;
 
@@ -19,18 +21,17 @@ router.get("/", async (req, res) => {
 });
 
 // Route to render homepage
-router.post("/recipes", withAuth, async (req, res) => {
-    console.log("I am at recipes");
-    console.log(req.cuisine);
-    cuisine = req.cuisine;
-    console.log(API_KEY);
+router.get("/recipes/:cuisine", withAuth, async (req, res) => {
+
+    cuisine = req.params.cuisine;
     const queryURL = `https://api.spoonacular.com/recipes/complexSearch?&cuisine=${cuisine}&apiKey=${API_KEY}`;
-    const response = await fetch(queryURL);
-    const recipeData = await response.json();
-    console.log(recipeData);
-    const recipes = recipeData.map((recipe) => recipe.get({ plain: true }));
+
+    const response = await axios.get(queryURL);
+
+    const dishes = response.data.results;
+
     res.render("recipes", {
-        recipes,
+        dishes,
         logged_in: req.session.logged_in,
     });
 

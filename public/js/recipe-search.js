@@ -1,29 +1,37 @@
 
-const cuisineList = document.getElementById('cuisine-list');
 
-cuisineList.addEventListener('click', async function (event) {
+async function chooseCusineHandler(event) {
+
     const clickedListItem = event.target;
+    words = clickedListItem.textContent.split(" ");
+    let cuisine;
+    if (words.length > 2) {
+        cuisine = words[0] + " " + words[1];
+    }
+    else {
+        cuisine = words[0];
+    }
 
-
-    if (clickedListItem.tagName === 'li') {
-        const response = await fetch('/recipes', {
-            method: 'POST',
-            body: JSON.stringify({
-                cuisine: clickedListItem.textContent.substring(0, clickedListItem.textContent.length - 1)
-            }),
+    if (clickedListItem.tagName === 'LI') {
+        const response = await fetch(`/recipes/${cuisine}`, {
+            method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
             },
         });
 
         if (response.ok) {
-            // Reload the page to show the new comment
-            document.location.reload();
+
+            document.location.replace(`/recipes/${cuisine}`);
         } else {
             // Display an alert with the error message
             alert(response.statusText);
         }
     }
+}
 
 
-});
+const cuisineList = document.getElementById('cuisine-list');
+if (cuisineList) {
+    cuisineList.addEventListener('click', chooseCusineHandler);
+}

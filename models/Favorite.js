@@ -11,12 +11,9 @@ Favorite.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    user_id: {  //foreign key
+    user_id: {  
       type: DataTypes.STRING,
       allowNull: false,
-      validate: {
-        len: [1],
-      },
     },
     user_id: {
       type: DataTypes.INTEGER,
@@ -29,18 +26,19 @@ Favorite.init(
     recipe_id: { //foreign key
       type: DataTypes.INTEGER,
       allowNull: true,
-      references: {
-        model: "Recipe",
-        key: "id",
-      },
     },
+    spoon_id:{
+    type: DataTypes.INTEGER,
+      allowNull: false,
+    }
   },
+
   {
   sequelize,
   timestamps: true,
   freezeTableName: true,
   underscored: true,
-  modelName: "comment",
+  modelName: "recipe",
   }
   );
   

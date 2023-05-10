@@ -1,6 +1,6 @@
 async function addToFavesHandler() {
 
-    const spoon_id = window.location.toString().split('/')[window.location.toString().split('/').length - 1];
+    const spoon_id = window.location.toString().split('/')[window.location.toString().split('/').length - 1].split("_")[0];
     let calories;
     // Select all <li> elements within the <ul> by using a CSS selector
     var listItems = document.querySelectorAll('#dish_nutr li');
@@ -23,7 +23,7 @@ async function addToFavesHandler() {
     const name = document.getElementById('dish_title').textContent;
     const picture_source = document.getElementById('dish_pick').src;
 
-    const response = await fetch(`/api/recipes`, {
+    const response = await fetch(`/api/recipes/`, {
         method: 'POST',
         body: JSON.stringify({
             name,
@@ -37,8 +37,6 @@ async function addToFavesHandler() {
     });
 
     if (response.ok) {
-        const data = await response.json(); // Parse the response body as JSON
-        console.log(data);
         document.location.replace('/dashboard');
     } else {
         // Display an alert with the error message

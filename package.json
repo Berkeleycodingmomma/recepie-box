@@ -33,7 +33,6 @@
     "fetch": "^1.1.0",
     "handlebars": "^4.7.6",
     "mysql2": "^3.3.0",
-    "node-fetch": "^3.3.1",
     "sequelize": "^6.29.3"
   }
 }

@@ -6,7 +6,7 @@ const withAuth = require("../../utils/auth");
 router.post("/", withAuth, async (req, res) => {
 
   const recipeData = await Recipe.findOne({ where: { spoon_id: req.body.spoon_id } });
-  console.log(recipeData);
+
   // this recipe is still not in db
   if (!recipeData) {
     // add it to db
@@ -14,7 +14,6 @@ router.post("/", withAuth, async (req, res) => {
       const newRecipe = await Recipe.create({
         ...req.body,
       });
-      console.log(newRecipe);
       const newFavorite = await Favorite.create({
         user_id: req.session.user_id,
         recipe_id: newRecipe.id
@@ -30,7 +29,7 @@ router.post("/", withAuth, async (req, res) => {
     try {
       const newFavorite = await Favorite.create({
         user_id: req.session.user_id,
-        recipe_id: recipeData.id
+        recipe_id: recipe.dataValues.id
       });
 
       res.status(200).json(newFavorite);
@@ -41,6 +40,28 @@ router.post("/", withAuth, async (req, res) => {
 
 });
 
+router.delete('/:spoon_id', withAuth, async (req, res) => {
+  const recipeData = await Recipe.findOne({ where: { spoon_id: req.body.spoon_id } });
+  const recipe = recipeData.get({ plain: true });
+
+  Favorite.destroy({
+    where: {
+      id: recipe.id,
+      user_id: req.session.user_id,
+    },
+  })
+    .then((recipeData) => {
+      if (!recipeData) {
+        res.status(404).json({ message: 'No favorite with this parameters' });
+        return;
+      }
+      res.json(recipeData);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(err);
+    });
+});
 // Below gets all Recipes with associated username
 /*
 router.get("/", async (req, res) => {

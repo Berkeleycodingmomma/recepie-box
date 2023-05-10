@@ -21,7 +21,7 @@ async function addToFavesHandler() {
         calories = null;
     }
     const name = document.getElementById('dish_title').textContent;
-    const picture_source = document.getElementById('dish_pick').src;
+    const picture_source = document.getElementById('dish_pic').src;
 
     const response = await fetch(`/api/recipes`, {
         method: 'POST',

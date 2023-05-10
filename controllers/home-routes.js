@@ -55,8 +55,12 @@ router.get("/signup", (req, res) => {
 // Route to render individual recipe page
 router.get("/recipe/:id", withAuth, async (req, res) => {
 
-    const id = req.params.id;
-
+    const params = req.params.id.split("_");
+    const id = params[0];
+    let favorite = false;
+    if (params.length > 1) {
+        favorite = true;
+    }
 
     const instructionsURL = `https://api.spoonacular.com/recipes/${id}/analyzedInstructions?apiKey=${API_KEY}`
     const nutritionURL = `https://api.spoonacular.com/recipes/${id}/nutritionWidget.json?apiKey=${API_KEY}`
@@ -78,12 +82,12 @@ router.get("/recipe/:id", withAuth, async (req, res) => {
         title: title, servings: servings, readyInMinutes: readyInMinutes, imgSource: imgSource, instructions: instr, ingredients: nutritions.ingredients, nutrients:
             nutritions.nutrients
     };
-    console.log(result);
 
 
     res.render("recipe", {
         result,
         logged_in: req.session.logged_in,
+        favorite: favorite
     });
 
     /*

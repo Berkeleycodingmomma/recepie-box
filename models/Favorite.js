@@ -2,7 +2,7 @@ const { Model, DataTypes } = require("sequelize");
 const sequelize = require("../config/connection");
 
 
-class Favorite extends Model {}
+class Favorite extends Model { }
 
 Favorite.init(
   {
@@ -37,7 +37,7 @@ Favorite.init(
 
   {
     sequelize,
-    timestamps: true,
+    timestamps: false,
     freezeTableName: true,
     underscored: true,
     modelName: "favorite",

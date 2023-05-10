@@ -1,30 +1,33 @@
-async function deleteHandler() {
-
-    const spoon_id = window.location.toString().split('/')[window.location.toString().split('/').length - 1].split("_")[0];
+async function deleteHandler(event) {
+  if (event.target.classList.contains("remove-button")) {
+    const clickbutton = event.target;
+    const spoon_id = clickbutton.getAttribute("data-id");
+    console.log(clickbutton)
+    console.log(spoon_id)
+    console.log(event.target.classList)
+     
     const response = await fetch(`/api/recipes/${spoon_id}`, {
-        method: 'DELETE',
-        body: JSON.stringify({
-            spoon_id: spoon_id
-        }),
-        headers: {
-            'Content-Type': 'application/json',
-        },
+      method: "DELETE",
+      body: JSON.stringify({
+        spoon_id: spoon_id,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
     });
 
     if (response.ok) {
-        const data = await response.json(); // Parse the response body as JSON
-        console.log(data);
-        document.location.replace('/dashboard');
+      const data = await response.json(); // Parse the response body as JSON
+      console.log(data);
+      document.location.replace("/dashboard");
     } else {
-        // Display an alert with the error message
-        alert(response.statusText);
+      // Display an alert with the error message
+      alert(response.statusText);
     }
+  }
 }
 
-
-
-
-const deleteFromFavorites = document.getElementById('delete-from-favorites');
+const deleteFromFavorites = document.getElementById("recipes-container");
 if (deleteFromFavorites) {
-    deleteFromFavorites.addEventListener('click', deleteHandler);
+  deleteFromFavorites.addEventListener("click", deleteHandler);
 }

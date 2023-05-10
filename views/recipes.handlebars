@@ -1,8 +1,11 @@
-<h1>Found Recepies</h1>
+<h1>Found Recipes</h1>
 <ul>
+  <div class="dish-container">
   {{#each dishes as |dish|}}
+  
   <li>
     {{> dish-info dish}}
   </li>
   {{/each}}
+  </div>
 </ul>

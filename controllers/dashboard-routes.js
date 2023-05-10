@@ -20,16 +20,14 @@ router.get("/", withAuth, async (req, res) => {
 
         const userFavoriteRecipes = userData.user_favorite.map((recipe) => recipe.dataValues);
         const favoriteDishes = [];
-        console.log(userFavoriteRecipes);
+
         for (i = 0; i < userFavoriteRecipes.length; i++) {
-            console.log(userFavoriteRecipes[i]);
             favoriteDishes.push({
                 id: userFavoriteRecipes[i].id, name: userFavoriteRecipes[i].name, picture_source: userFavoriteRecipes[i].picture_source,
                 spoon_id: userFavoriteRecipes[i].spoon_id
             })
         }
 
-        console.log(favoriteDishes);
         res.render("dashboard", {
             favoriteDishes,
             logged_in: req.session.logged_in,

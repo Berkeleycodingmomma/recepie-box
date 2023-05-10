@@ -6,7 +6,7 @@ const withAuth = require("../../utils/auth");
 router.post("/", withAuth, async (req, res) => {
 
   const recipeData = await Recipe.findOne({ where: { spoon_id: req.body.spoon_id } });
-  console.log(recipeData);
+
   // this recipe is still not in db
   if (!recipeData) {
     // add it to db
@@ -14,7 +14,6 @@ router.post("/", withAuth, async (req, res) => {
       const newRecipe = await Recipe.create({
         ...req.body,
       });
-      console.log(newRecipe);
       const newFavorite = await Favorite.create({
         user_id: req.session.user_id,
         recipe_id: newRecipe.id
@@ -30,7 +29,7 @@ router.post("/", withAuth, async (req, res) => {
     try {
       const newFavorite = await Favorite.create({
         user_id: req.session.user_id,
-        recipe_id: recipeData.id
+        recipe_id: recipe.dataValues.id
       });
 
       res.status(200).json(newFavorite);
@@ -42,11 +41,13 @@ router.post("/", withAuth, async (req, res) => {
 });
 
 router.delete('/:spoon_id', withAuth, async (req, res) => {
-
+  console.log(req.body.spoon_id);
   const recipeData = await Recipe.findOne({ where: { spoon_id: req.body.spoon_id } });
+  const recipe = recipeData.get({ plain: true });
+
   Favorite.destroy({
     where: {
-      id: recipeData.id,
+      id: recipe.id,
       user_id: req.session.user_id,
     },
   })

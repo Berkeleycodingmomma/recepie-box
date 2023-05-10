@@ -9,7 +9,11 @@
   {{#each favoriteDishes as |dish|}}
   <a class="card-link" href="/recipe/{{dish.spoon_id}}_true">{{dish.name}}</a>
   <img src={{dish.picture_source}} alt='picture of a dish' />
+  <p>
+    {{dish.calories}}
+  <p>
+    <br />
 
-  {{/each}}
+    {{/each}}
 
 </div>

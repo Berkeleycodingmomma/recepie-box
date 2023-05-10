@@ -55,23 +55,27 @@ router.get("/signup", (req, res) => {
 // Route to render individual recipe page
 router.get("/recipe/:id", withAuth, async (req, res) => {
 
-    const id = req.params.id.split('_')[0];
-    const title = req.params.id.split('_')[1];
+    const id = req.params.id;
 
-    var instructionsURL = `https://api.spoonacular.com/recipes/${id}/analyzedInstructions?apiKey=${API_KEY}`
-    var nutritionURL = `https://api.spoonacular.com/recipes/${id}/nutritionWidget.json?apiKey=${API_KEY}`
 
+    const instructionsURL = `https://api.spoonacular.com/recipes/${id}/analyzedInstructions?apiKey=${API_KEY}`
+    const nutritionURL = `https://api.spoonacular.com/recipes/${id}/nutritionWidget.json?apiKey=${API_KEY}`
+    const infoURL = `https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_KEY}`;
 
     const response_instructions = await axios.get(instructionsURL);
     const instructions = response_instructions;
     const response_nutritions = await axios.get(nutritionURL);
     const nutritions = response_nutritions.data;
+    const response_info = await axios.get(infoURL);
 
     const instr = instructions.data[0].steps;
-
+    const title = response_info.data.title;
+    const servings = response_info.data.servings;
+    const readyInMinutes = response_info.data.readyInMinutes;
+    const imgSource = response_info.data.image;
 
     const result = {
-        title: title, instructions: instr, ingredients: nutritions.ingredients, nutrients:
+        title: title, servings: servings, readyInMinutes: readyInMinutes, imgSource: imgSource, instructions: instr, ingredients: nutritions.ingredients, nutrients:
             nutritions.nutrients
     };
     console.log(result);

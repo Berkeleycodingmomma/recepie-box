@@ -41,7 +41,6 @@ router.post("/", withAuth, async (req, res) => {
 });
 
 router.delete('/:spoon_id', withAuth, async (req, res) => {
-  console.log(req.body.spoon_id);
   const recipeData = await Recipe.findOne({ where: { spoon_id: req.body.spoon_id } });
   const recipe = recipeData.get({ plain: true });
 
@@ -52,7 +51,6 @@ router.delete('/:spoon_id', withAuth, async (req, res) => {
     },
   })
     .then((recipeData) => {
-      console.log(recipeData);
       if (!recipeData) {
         res.status(404).json({ message: 'No favorite with this parameters' });
         return;

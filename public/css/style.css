@@ -10,6 +10,42 @@
 
 }
 
+
+
+
+
+ .dish-container {
+
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 20px;
+  margin-top: 60px; 
+
+  
+} 
+
+.card-body {
+  background-color: #656565;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center; 
+  max-width: 500px;
+  border: 20px solid #e3d48d;
+}
+
+.card-header {
+  background-color: #b4c78d;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  
+}
+
 .navbar-brand {
   color: #e3d48d;
   font-family: cursive;
@@ -20,6 +56,7 @@ h1 {
   font-family: cursive;
   color: #c2040b;
   font-size: 40x;
+  margin-top: 30px; 
 
 }
 

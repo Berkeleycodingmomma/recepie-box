@@ -34,7 +34,11 @@ router.post("/", withAuth, async (req, res) => {
     try {
       const newFavorite = await Favorite.create({
         user_id: req.session.user_id,
+<<<<<<< Updated upstream
         recipe_id: recipe.id
+=======
+        recipe_id: recipeData.dataValues.id
+>>>>>>> Stashed changes
       });
 
       res.status(200).json(newFavorite);

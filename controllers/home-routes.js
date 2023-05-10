@@ -50,40 +50,69 @@ router.get("/signup", (req, res) => {
     }
     res.render("signup");
 });
-/*
+
 
 // Route to render individual recipe page
 router.get("/recipe/:id", withAuth, async (req, res) => {
-    try {
-        // Find recipe by ID with associated username and comments with associated usernames
-        const recipeData = await recipe.findByPk(req.params.id, {
-            include: [{
-                model: User,
-                attributes: ["username"]
-            },
-            {
-                model: Comment,
-                include: [{
-                    model: User,
-                    attributes: ["username"]
-                }],
-            },
-            ],
-        });
-        // Convert recipe data to plain JavaScript object and render recipe templates with recipe data and login status
-        const recipe = recipeData.get({
-            plain: true
-        });
-        res.render("recipe", {
-            ...recipe,
-            logged_in: req.session.logged_in,
-        });
-    } catch (err) {
-        res.status(500).json(err);
-    }
+
+    const id = req.params.id.split('_')[0];
+    const title = req.params.id.split('_')[1];
+
+    var instructionsURL = `https://api.spoonacular.com/recipes/${id}/analyzedInstructions?apiKey=${API_KEY}`
+    var nutritionURL = `https://api.spoonacular.com/recipes/${id}/nutritionWidget.json?apiKey=${API_KEY}`
+
+
+    const response_instructions = await axios.get(instructionsURL);
+    const instructions = response_instructions;
+    const response_nutritions = await axios.get(nutritionURL);
+    const nutritions = response_nutritions.data;
+
+    const instr = instructions.data[0].steps;
+
+
+    const result = {
+        title: title, instructions: instr, ingredients: nutritions.ingredients, nutrients:
+            nutritions.nutrients
+    };
+    console.log(result);
+
+
+    res.render("recipe", {
+        result,
+        logged_in: req.session.logged_in,
+    });
+
+    /*
+     try {
+         // Find recipe by ID with associated username and comments with associated usernames
+         const recipeData = await recipe.findByPk(req.params.id, {
+             include: [{
+                 model: User,
+                 attributes: ["username"]
+             },
+             {
+                 model: Comment,
+                 include: [{
+                     model: User,
+                     attributes: ["username"]
+                 }],
+             },
+             ],
+         });
+         // Convert recipe data to plain JavaScript object and render recipe templates with recipe data and login status
+         const recipe = recipeData.get({
+             plain: true
+         });
+         res.render("recipe", {
+             ...recipe,
+             logged_in: req.session.logged_in,
+         });
+     } catch (err) {
+         res.status(500).json(err);
+     }*/
 });
 
-// Route to render dashboard page with all recipes by current user then finding all recipes by current user with associated usernames
+/*// Route to render dashboard page with all recipes by current user then finding all recipes by current user with associated usernames
 router.get("/dashboard", withAuth, async (req, res) => {
     try {
         const recipeData = await recipe.findAll({

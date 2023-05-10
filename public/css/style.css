@@ -39,6 +39,18 @@ body {
   background-size: cover;
 }
 
+
+.heart-button {
+  background-color: #ff4d4d;
+  color: white;
+  padding: 10px 40px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
 /* Responsive Features */
 
 @media screen and (min-width: 768px) {}

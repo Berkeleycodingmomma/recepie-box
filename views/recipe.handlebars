@@ -1,29 +1,39 @@
-{{!-- views/recipe.handlebars file --}}
-<main class="container mt-5">
-  <article>
-    <h1>{{title}}</h1>
-    <p>Created by: {{user.username}} | Date: {{format_date createdAt}}</p>
-    <p>{{content}}</p>
-  </article>
-  {{#if logged_in}}
-    <form class="new-recipe-comment-form" class="mb-3">
-      <div class="mb-3">
-        <label for="comment" class="form-label">Add Comment:</label>
-        <textarea
-          class="form-control"
-          id="content-new-recipe-comment"
-          rows="3"
-          placeholder="Add a comment..."
-        ></textarea>
-      </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
-  {{/if}}
-  <h2>Comment History:</h2>
-  {{#each comments}}
-    <div class="comment mb-3">
-      <p>{{comment_text}}</p>
-      <p>By {{user.username}} on {{format_date createdAt}}</p>
-    </div>
-  {{/each}}
-</main>
+<div>
+
+  <h1>{{result.title}}</h1>
+
+  <div>
+    <h2>Instructions</h2>
+    <ol>
+      {{#each result.instructions as |instruction|}}
+      <li>
+        {{instruction.step}}
+      </li>
+      {{/each}}
+    </ol>
+  </div>
+  <div>
+    <h2>Ingredients</h2>
+    <ul>
+      {{#each result.ingredients as |ingredient|}}
+      <li>
+        {{ingredient.name}} {{ingredient.amount}} {{ingredient.unit}}
+      </li>
+      {{/each}}
+      <ul>
+  </div>
+  <div>
+    <h2>Nutrients</h2>
+    <ul>
+      {{#each result.nutrients as |nutrient|}}
+      <li>
+        {{nutrient.name}} {{ingredient.amount}} {{ingredient.unit}} {{ingredient.percentOfDailyNeeds}}
+      </li>
+      {{/each}}
+    </ul>
+  </div>
+
+
+  <button id="add-to-favorites" class="heart-button">Add to Favorites</button>
+
+</div>

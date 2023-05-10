@@ -69,10 +69,16 @@ router.get("/recipe/:id", withAuth, async (req, res) => {
     const response_instructions = await axios.get(instructionsURL);
     const instructions = response_instructions;
     const response_nutritions = await axios.get(nutritionURL);
-    const nutritions = response_nutritions.data;
-    const response_info = await axios.get(infoURL);
 
-    const instr = instructions.data[0].steps;
+
+    const nutritions = response_nutritions.data;
+
+    const response_info = await axios.get(infoURL);
+    let instr = "";
+    if (instructions.data.length > 0) {
+        instr = instructions.data[0].steps;
+    }
+
     const title = response_info.data.title;
     const servings = response_info.data.servings;
     const readyInMinutes = response_info.data.readyInMinutes;

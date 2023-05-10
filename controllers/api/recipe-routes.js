@@ -41,6 +41,28 @@ router.post("/", withAuth, async (req, res) => {
 
 });
 
+router.delete('/:spoon_id', withAuth, async (req, res) => {
+
+  const recipeData = await Recipe.findOne({ where: { spoon_id: req.body.spoon_id } });
+  Favorite.destroy({
+    where: {
+      id: recipeData.id,
+      user_id: req.session.user_id,
+    },
+  })
+    .then((recipeData) => {
+      console.log(recipeData);
+      if (!recipeData) {
+        res.status(404).json({ message: 'No favorite with this parameters' });
+        return;
+      }
+      res.json(recipeData);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(err);
+    });
+});
 // Below gets all Recipes with associated username
 /*
 router.get("/", async (req, res) => {

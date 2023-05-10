@@ -76,6 +76,18 @@ body {
   overflow: hidden;
 }
 
+.brokenheart-button {
+  background-color: green;
+  color: white;
+  padding: 10px 40px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+
 /* Responsive Features */
 
 @media screen and (min-width: 768px) {}

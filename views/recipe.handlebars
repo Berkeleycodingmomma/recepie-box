@@ -1,10 +1,9 @@
 <div>
 
-  <h1>{{result.title}}</h1>
-  <img src={{result.imgSource}} alt='picture of a dish' />
-  <br />
+  <h1 id="dish_title">{{result.title}}</h1>
+  <img id="dish_pick" src={{result.imgSource}} alt='picture of a dish' />
   Servings: {{result.servings}}<br />
-  Time to cook: {{result.readyInMinutes}} mins
+  Time to cook: {{result.readyInMinutes}} minutes.
   <div>
     <h2>Instructions</h2>
     <ol>
@@ -27,16 +26,16 @@
   </div>
   <div>
     <h2>Nutrients</h2>
-    <ul>
+    <ul id="dish_nutr">
       {{#each result.nutrients as |nutrient|}}
       <li>
-        {{nutrient.name}} {{ingredient.amount}} {{ingredient.unit}} {{ingredient.percentOfDailyNeeds}}
+        {{nutrient.name}} {{nutrient.amount}} {{nutrient.unit}} {{nutrient.percentOfDailyNeeds}}%
       </li>
       {{/each}}
     </ul>
   </div>
 
-
+  {{#unless favorite}}
   <button id="add-to-favorites" class="heart-button">Add to Favorites</button>
-
+  {{/unless}}
 </div>

@@ -1,19 +1,15 @@
 <div class="container mt-5">
-  {{!-- <div class="row">
+  <div class="row">
     <div class="col-12">
       <h1 class="mb-4">Dashboard</h1>
-      <a href="/newrecipe" class="btn btn-primary">Create a New Recipe</a>
     </div>
   </div>
   <br>
-  <h1 class="mb-4">Recipe Box</h1>
-  {{#each recipes}}
-  <div class="recipe-container recipe mb-3">
-    <h2><a href="/recipe/{{id}}" class="text-decoration-none text-reset">{{title}}</a></h2>
-    <p>Created by: {{user.username}} | Date: {{format_date createdAt}}</p>
-    <a href="/editrecipe/{{id}}" class="btn btn-warning">Edit Recipe</a>
-    <button class="btn btn-danger delete-recipe" data-recipe-id="{{id}}">Delete</button>
-  </div>
-  {{/each}} --}}
-  <h1> NOTHING YET</h1>
+  <h1 class="mb-4">Recipe</h1>
+  {{#each favoriteDishes as |dish|}}
+  <a class="card-link" href="/recipe/{{dish.spoon_id}}_true">{{dish.name}}</a>
+  <img src={{dish.picture_source}} alt='picture of a dish' />
+
+  {{/each}}
+
 </div>

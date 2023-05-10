@@ -8,6 +8,16 @@
   border-radius: 0.5em;
 }
 
+.card-body {
+
+  background-color: #656565;
+}
+
+.card-header {
+
+  color: #b4c78d;
+}
+
 .navbar-brand {
   color: #e3d48d;
   font-family: cursive;

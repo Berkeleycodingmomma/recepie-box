@@ -1,15 +1,19 @@
 router = require("express").Router();
 const { Recipe, User, Favorite } = require("../../models");
+const { truncate } = require("../../models/Favorite");
 const withAuth = require("../../utils/auth");
 
 //This creates a new recipe with auth user
 router.post("/", withAuth, async (req, res) => {
 
   const recipeData = await Recipe.findOne({ where: { spoon_id: req.body.spoon_id } });
-
+  
   // this recipe is still not in db
   if (!recipeData) {
-    // add it to db
+    // add it to 
+    console.log("getting here");
+    
+
     try {
       const newRecipe = await Recipe.create({
         ...req.body,
@@ -18,7 +22,7 @@ router.post("/", withAuth, async (req, res) => {
         user_id: req.session.user_id,
         recipe_id: newRecipe.id
       });
-
+      console.log(recipeData)
       res.status(200).json(newFavorite);
 
     } catch (err) {
@@ -26,10 +30,11 @@ router.post("/", withAuth, async (req, res) => {
     }
   }
   else {
+    const recipe = recipeData.get({plain :true});
     try {
       const newFavorite = await Favorite.create({
         user_id: req.session.user_id,
-        recipe_id: recipe.dataValues.id
+        recipe_id: recipe.id
       });
 
       res.status(200).json(newFavorite);

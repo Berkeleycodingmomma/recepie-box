@@ -9,29 +9,29 @@ Recipe.init(
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
-      autoIncrement: true,
+      autoIncrement: true
     },
     name: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: false
     },
     calories: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.DECIMAL(5, 2),
       allowNull: true
     },
     picture_source: {
       type: DataTypes.STRING,
-      allowNull: true,
+      allowNull: true
     },
     spoon_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
-
+      unique: true
     },
   },
   {
     sequelize,
-    timestamps: true,
+    timestamps: false,
     freezeTableName: true,
     underscored: true,
     modelName: "recipe",

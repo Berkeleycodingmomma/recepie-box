@@ -1,6 +1,45 @@
-Constrouter = require("express").Router();
+router = require("express").Router();
 const { Recipe, User, Favorite } = require("../../models");
 const withAuth = require("../../utils/auth");
+
+//This creates a new recipe with auth user
+router.post("/", withAuth, async (req, res) => {
+
+  const recipeData = await Recipe.findOne({ where: { spoon_id: req.body.spoon_id } });
+  console.log(recipeData);
+  // this recipe is still not in db
+  if (!recipeData) {
+    // add it to db
+    try {
+      const newRecipe = await Recipe.create({
+        ...req.body,
+      });
+      console.log(newRecipe);
+      const newFavorite = await Favorite.create({
+        user_id: req.session.user_id,
+        recipe_id: newRecipe.id
+      });
+
+      res.status(200).json(newFavorite);
+
+    } catch (err) {
+      res.status(400).json(err);
+    }
+  }
+  else {
+    try {
+      const newFavorite = await Favorite.create({
+        user_id: req.session.user_id,
+        recipe_id: recipeData.id
+      });
+
+      res.status(200).json(newFavorite);
+    } catch (err) {
+      res.status(400).json(err);
+    }
+  }
+
+});
 
 // Below gets all Recipes with associated username
 /*
@@ -37,18 +76,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-//This creates a new recipe with auth user
-router.post("/", withAuth, async (req, res) => {
-  try {
-    const newPost = await Post.create({
-      ...req.body,
-      user_id: req.session.user_id,
-    });
-    res.status(200).json(newPost);
-  } catch (err) {
-    res.status(400).json(err);
-  }
-});
+
 
 // This updates an existing  with authenticated user
 router.put("/:id", withAuth, async (req, res) => {
@@ -88,5 +116,5 @@ router.delete("/:id", withAuth, async (req, res) => {
     res.status(500).json(err);
   }
 });
-
-module.exports = router;*/
+*/
+module.exports = router;

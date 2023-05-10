@@ -1,11 +1,13 @@
 .recipe-container {
   transition: background-color 0.3s;
+
 }
 
 .recipe-container:hover {
   border-right: 1em solid #656565;
   background-color: rgba(126, 126, 126, 0.2);
   border-radius: 0.5em;
+
 }
 
 
@@ -71,10 +73,33 @@ h6 {
 }
 
 body {
-  background: linear-gradient(to left, rgba(255, 255, 255, 0) 0%, rgb(213 181 146) 100%), 
-              url(./images/dish.png) center center no-repeat;
+  background: linear-gradient(to left, rgba(255, 255, 255, 0) 0%, rgb(213 181 146) 100%),
+    url(./images/dish.png) center center no-repeat;
   background-size: cover;
 }
+
+#cuisine-list {
+  list-style: none;
+  padding: 0;
+  width: 200px;
+}
+
+#cuisine-list li {
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+#cuisine-list li:hover {
+  background-color: lightgray;
+}
+
+#cuisine-list li::before {
+  content: '\25B6';
+  margin-right: 5px;
+}
+
+
 
 
 .heart-button {

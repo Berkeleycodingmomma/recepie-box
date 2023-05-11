@@ -1,11 +1,9 @@
 <h1>Found Recipes</h1>
-<ul>
-  <div class="dish-container">
-  {{#each dishes as |dish|}}
-  
-  <li>
-    {{> dish-info dish}}
-  </li>
-  {{/each}}
-  </div>
-</ul>
+
+<div class="dish-container mt-5">
+  <ul>
+    {{#each dishes as |dish|}}
+      {{> dish-info dish}}
+    {{/each}}
+  </ul>
+</div>

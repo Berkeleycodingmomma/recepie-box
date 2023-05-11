@@ -55,11 +55,15 @@ router.get("/signup", (req, res) => {
 // Route to render individual recipe page
 router.get("/recipe/:id", withAuth, async (req, res) => {
 
-    const params = req.params.id.split("_");
-    const id = params[0];
+    const id = req.params.id;
     let favorite = false;
-    if (params.length > 1) {
-        favorite = true;
+    const recipeData = await Recipe.findOne({where: {spoon_id: id}});
+    if (recipeData) {
+        const recipe = recipeData.get({plain: true});
+        const favoriteData = await Favorite.findOne({where: {recipe_id: recipe.id, user_id: req.session.user_id}});
+        if (favoriteData) {
+            favorite= true;
+        }
     }
 
     const instructionsURL = `https://api.spoonacular.com/recipes/${id}/analyzedInstructions?apiKey=${API_KEY}`
@@ -68,6 +72,8 @@ router.get("/recipe/:id", withAuth, async (req, res) => {
 
     const instructions = await axios.get(instructionsURL);
     const responseNutritions = await axios.get(nutritionURL);
+
+
     const nutritions = responseNutritions.data;
 
     const responseInfo = await axios.get(infoURL);
@@ -86,14 +92,11 @@ router.get("/recipe/:id", withAuth, async (req, res) => {
             nutritions.nutrients
     };
 
+
     res.render("recipe", {
         result,
         logged_in: req.session.logged_in,
         favorite: favorite
     });
-
-
 });
-
-
 module.exports = router;

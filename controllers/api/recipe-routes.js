@@ -11,7 +11,6 @@ router.post("/", withAuth, async (req, res) => {
   // this recipe is still not in db
   if (!recipeData) {
     // add it to 
-    console.log("getting here");
 
 
     try {
@@ -22,7 +21,6 @@ router.post("/", withAuth, async (req, res) => {
         user_id: req.session.user_id,
         recipe_id: newRecipe.id
       });
-      console.log(recipeData)
       res.status(200).json(newFavorite);
 
     } catch (err) {

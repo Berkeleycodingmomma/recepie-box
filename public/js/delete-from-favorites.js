@@ -2,9 +2,7 @@ async function deleteHandler(event) {
   if (event.target.classList.contains("remove-button")) {
     const clickbutton = event.target;
     const spoon_id = clickbutton.getAttribute("data-id");
-    console.log(clickbutton)
-    console.log(spoon_id)
-    console.log(event.target.classList)
+   
      
     const response = await fetch(`/api/recipes/${spoon_id}`, {
       method: "DELETE",
@@ -18,7 +16,6 @@ async function deleteHandler(event) {
 
     if (response.ok) {
       const data = await response.json(); // Parse the response body as JSON
-      console.log(data);
       document.location.replace("/dashboard");
     } else {
       // Display an alert with the error message

@@ -3,7 +3,7 @@ async function addToFavesHandler() {
     const spoon_id = window.location.toString().split('/')[window.location.toString().split('/').length - 1].split("_")[0];
     let calories;
     // Select all <li> elements within the <ul> by using a CSS selector
-    var listItems = document.querySelectorAll('#dish_nutr li');
+    var listItems = document.querySelectorAll('#dish-nutr li');
 
     // Loop through the list items
     for (var i = 0; i < listItems.length; i++) {
@@ -18,8 +18,8 @@ async function addToFavesHandler() {
     if (!calories) {
         calories = null;
     }
-    const name = document.getElementById('dish_title').textContent;
-    const picture_source = document.getElementById('dish_pic').src;
+    const name = document.getElementById('dish-title').textContent;
+    const picture_source = document.getElementById('dish-pic').src;
 
     const response = await fetch(`/api/recipes/`, {
         method: 'POST',

@@ -1,6 +1,5 @@
 .recipe-container {
   transition: background-color 0.3s;
-
 }
 
 .recipe-container:hover {
@@ -10,6 +9,7 @@
 
 }
 
+<<<<<<< HEAD
 .dish_
 
 
@@ -48,14 +48,16 @@
   gap: 20px;
 }
 
+=======
+>>>>>>> a0f7ef631f05425da3837d12c18ffb09805c4c3b
 .dish-container {
-
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   gap: 20px;
+<<<<<<< HEAD
   margin-top: 60px; 
 
 <<<<<<< HEAD
@@ -92,6 +94,10 @@
   
 } 
 >>>>>>> 952610b65b283a908a135491f40d0a23f157b7bd
+=======
+  margin-top: 60px;
+}
+>>>>>>> a0f7ef631f05425da3837d12c18ffb09805c4c3b
 
 .card-body {
   background-color: #656565;
@@ -166,8 +172,6 @@ body {
   content: '\25B6';
   margin-right: 5px;
 }
-
-
 
 
 .heart-button {

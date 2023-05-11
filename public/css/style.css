@@ -10,6 +10,8 @@
 
 }
 
+.dish_
+
 
 .dish-container {
 
@@ -19,10 +21,10 @@
   justify-content: flex-start;
   align-items: center;
   gap: 20px;
-  margin-top: 60px;
+  margin-top: 60px; 
 
-
-}
+  
+} 
 
 .card-body {
   background-color: #656565;

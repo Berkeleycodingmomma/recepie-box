@@ -1,7 +1,7 @@
 <div>
 
-  <h1 id="dish_title">{{result.title}}</h1>
-  <img id="dish_pic" src={{result.imgSource}} alt='picture of a dish' />
+  <h1 id="dish-title">{{result.title}}</h1>
+  <img id="dish-pic" src={{result.imgSource}} alt='picture of a dish' />
   Servings: {{result.servings}}<br />
   Time to cook: {{result.readyInMinutes}} minutes.
   {{#if result.instructions }}
@@ -28,7 +28,7 @@
   </div>
   <div>
     <h2>Nutrients</h2>
-    <ul id="dish_nutr">
+    <ul id="dish-nutr">
       {{#each result.nutrients as |nutrient|}}
       <li>
         {{nutrient.name}} {{nutrient.amount}} {{nutrient.unit}} {{nutrient.percentOfDailyNeeds}}%

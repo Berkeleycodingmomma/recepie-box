@@ -1,6 +1,5 @@
 .recipe-container {
   transition: background-color 0.3s;
-
 }
 
 .recipe-container:hover {
@@ -10,21 +9,15 @@
 
 }
 
-.dish_
-
-
 .dish-container {
-
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   gap: 20px;
-  margin-top: 60px; 
-
-  
-} 
+  margin-top: 60px;
+}
 
 .card-body {
   background-color: #656565;
@@ -97,8 +90,6 @@ body {
   content: '\25B6';
   margin-right: 5px;
 }
-
-
 
 
 .heart-button {

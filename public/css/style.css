@@ -9,47 +9,6 @@
 
 }
 
-<<<<<<< HEAD
-.dish_
-
-
-.dashboard {
-
-  display: flex;
-  text-align: center;
-  margin-top: 2px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 10vh;
-  font-size: 5rem;
-  color: black;
-  -webkit-text-stroke: 2px black;
-  color: #c2040b;
-
-} 
-
-
-#dish_pick {
-  max-width: 500px;
-  border: 20px solid  #656565;
-  margin-top: 60px;
-  margin-bottom: 60px;
-}
-
-
-
-#recipes-container {
-  display: flex;
-  max-width: 500px;
-  margin-top: 60px;
-  margin-bottom: 60px;
-  flex-direction: column;
-  gap: 20px;
-}
-
-=======
->>>>>>> a0f7ef631f05425da3837d12c18ffb09805c4c3b
 .dish-container {
   display: flex;
   flex-wrap: wrap;

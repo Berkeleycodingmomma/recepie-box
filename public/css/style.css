@@ -16,10 +16,8 @@
   justify-content: flex-start;
   align-items: center;
   gap: 20px;
-<<<<<<< HEAD
   margin-top: 60px; 
 
-<<<<<<< HEAD
 }
   
 .fav-container {
@@ -49,14 +47,6 @@
   
   
 }
-=======
-  
-} 
->>>>>>> 952610b65b283a908a135491f40d0a23f157b7bd
-=======
-  margin-top: 60px;
-}
->>>>>>> a0f7ef631f05425da3837d12c18ffb09805c4c3b
 
 .card-body {
   background-color: #656565;

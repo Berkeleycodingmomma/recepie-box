@@ -8,7 +8,6 @@
     "start": "node server.js",
     "seed": "node seeds/index.js",
     "watch": "nodemon server.js"
-
   },
   "repository": {
     "type": "git",
@@ -34,5 +33,6 @@
     "handlebars": "^4.7.6",
     "mysql2": "^3.3.0",
     "sequelize": "^6.29.3"
-  }
+  },
+  "devDependencies": {}
 }

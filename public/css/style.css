@@ -13,26 +13,24 @@
 
 .dashboard {
 
-  display: flex;
+  display: block;
   text-align: center;
-  margin-top: 2px;
-  display: flex;
+  margin-top: 45px;
   justify-content: center;
   align-items: center;
   height: 10vh;
   font-size: 5rem;
-  color: black;
   -webkit-text-stroke: 2px black;
   color: #c2040b;
 
 } 
 
 
-#dish_pick {
+#dish-pic {
   max-width: 500px;
   border: 20px solid  #656565;
-  margin-top: 60px;
-  margin-bottom: 60px;
+  /* margin-top: 60px;
+  margin-bottom: 60px; */
 }
 
 
@@ -95,6 +93,7 @@
   align-items: center;
   max-width: 500px;
   border: 20px solid #e3d48d;
+  margin-top: -20px;
 }
 
 .card-header {
@@ -103,7 +102,8 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  margin-top: 30px;
+  /* margin-top: 30px;
+  margin-bottom: 30px; */
 
 }
 

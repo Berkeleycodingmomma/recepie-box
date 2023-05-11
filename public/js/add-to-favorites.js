@@ -8,11 +8,9 @@ async function addToFavesHandler() {
     // Loop through the list items
     for (var i = 0; i < listItems.length; i++) {
         let listItem = listItems[i].textContent.trim();
-        console.log(listItem);
         listItemName = listItem.split(" ")[0];
         // Check if the content of the list item matches the desired content
         if (listItemName === 'Calories') {
-            console.log('Found:', listItem);
             calories = listItem.split(" ")[1];
             break; // Exit the loop since we found the desired item
         }
@@ -21,7 +19,7 @@ async function addToFavesHandler() {
         calories = null;
     }
     const name = document.getElementById('dish_title').textContent;
-    const picture_source = document.getElementById('dish_pick').src;
+    const picture_source = document.getElementById('dish_pic').src;
 
     const response = await fetch(`/api/recipes/`, {
         method: 'POST',

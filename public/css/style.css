@@ -10,6 +10,8 @@
 
 }
 
+.dish_
+
 
 .dashboard {
 
@@ -54,9 +56,9 @@
   justify-content: flex-start;
   align-items: center;
   gap: 20px;
-  margin-top: 60px;
+  margin-top: 60px; 
 
-
+<<<<<<< HEAD
 }
   
 .fav-container {
@@ -86,6 +88,10 @@
   
   
 }
+=======
+  
+} 
+>>>>>>> 952610b65b283a908a135491f40d0a23f157b7bd
 
 .card-body {
   background-color: #656565;

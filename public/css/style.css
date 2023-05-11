@@ -63,8 +63,19 @@
   align-items: center;
   max-width: 500px;
   border: 20px solid #e3d48d;
+}
+
+.card-body-dashboard {
+  background-color: #656565;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  max-width: 500px;
+  border: 20px solid #e3d48d;
   margin-top: -20px;
 }
+
 
 .card-header {
   background-color: #b4c78d;

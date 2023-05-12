@@ -3,16 +3,21 @@ async function addToFavesHandler() {
     const spoon_id = window.location.toString().split('/')[window.location.toString().split('/').length - 1];
     let calories;
     // Select all <li> elements within the <ul> by using a CSS selector
-    var listItems = document.querySelectorAll('#dish-nutr li');
+    const table = document.getElementById("dish-nutr");
 
-    // Loop through the list items
-    for (var i = 0; i < listItems.length; i++) {
-        let listItem = listItems[i].textContent.trim();
-        listItemName = listItem.split(" ")[0];
-        // Check if the content of the list item matches the desired content
-        if (listItemName === 'Calories') {
-            calories = listItem.split(" ")[1];
-            break; // Exit the loop since we found the desired item
+    // Get all the rows in the table body
+    const rows = table.getElementsByTagName("tr");
+
+    // Loop through the rows
+    for (var i = 1; i < rows.length; i++) {
+        const nameColumn = rows[i].getElementsByTagName("td")[0];
+        const amountColumn = rows[i].getElementsByTagName("td")[1];
+
+        // Check if the name matches the desired name
+        if (nameColumn.textContent === "Calories") {
+            // Get the value from the "Amount" column
+            calories = amountColumn.textContent;
+            break; // Exit the loop since we found the desired row
         }
     }
     if (!calories) {

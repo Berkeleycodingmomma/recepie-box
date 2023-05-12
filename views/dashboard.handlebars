@@ -1,4 +1,3 @@
-
 <h1 class="dashboard ">My Favorite Recipes</h1>
 <div class="fav-container mt-5">
   <div id="recipes-container">
@@ -8,10 +7,9 @@
     </div>
     <div class="card-body-dashboard">
       <img src={{dish.picture_source}} alt="picture of a dish" />
-      <p>{{dish.calories}}</p>
+      <p style="color: white;">{{dish.calories}} Calories</p>
       <button data-id="{{dish.spoon_id}}" class="remove-button">Remove from Favorites</button>
     </div>
     {{/each}}
   </div>
 </div>
-

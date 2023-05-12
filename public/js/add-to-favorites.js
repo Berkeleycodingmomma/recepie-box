@@ -1,6 +1,6 @@
 async function addToFavesHandler() {
 
-    const spoon_id = window.location.toString().split('/')[window.location.toString().split('/').length - 1].split("_")[0];
+    const spoon_id = window.location.toString().split('/')[window.location.toString().split('/').length - 1];
     let calories;
     // Select all <li> elements within the <ul> by using a CSS selector
     var listItems = document.querySelectorAll('#dish-nutr li');

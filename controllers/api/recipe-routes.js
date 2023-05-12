@@ -52,12 +52,12 @@ router.delete('/:spoon_id', withAuth, async (req, res) => {
       user_id: req.session.user_id,
     },
   })
-    .then((recipeData) => {
-      if (!recipeData) {
+    .then((favoriteData) => {
+      if (!favoriteData) {
         res.status(404).json({ message: 'No favorite with this parameters' });
         return;
       }
-      res.json(recipeData);
+      res.json(favoriteData);
     })
     .catch((err) => {
       console.log(err);

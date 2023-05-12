@@ -1,15 +1,16 @@
-# recepie-box
+# Recepie-Box
 #
-# Command-line application, mysql Employee Tracker
+# 
 #
 ## Description 
 #
-
+Unlock the Secrets of Flavorful Delights! With this intuitive app you will be able to search out countless recipes oranized by cusine type and save your favorites for easy access to top notch recipies from aroud the globe. 
 
 #
-## Visual image of the terminal after generating a .svg logo through the command-line
+## Beautiful Image
 #
 
+![plot](./assets/photo.png)
 
 #
 ## Built With:
@@ -29,85 +30,175 @@
 - License Badge: [Shields.io](https://shields.io/)
 - Visual Studio Code: [Website](https://code.visualstudio.com/)
 - Heroku: [Website](https://id.heroku.com/login)
+- Greensocks:  [Website](https://greensock.com/)
+- Nodemon: [Website](https://www.npmjs.com/package/nodemon) 
 
 
 
 
-## Technology/Research Data Used 
 
-|         |         | 
-| ------------- |:-------------:| 
-Handlebars info: https://waelyasmina.medium.com/a-guide-into-using-handlebars-with-your-express-js-application-22b944443b65
-
-#
-## Youtube link to a walk-through demonstrating how to crete CMS-style blog site
-#
-
-* [Youtube-demo-link]()
-
-#
-
-## Code examples of the project
-
-#
---------------------------------------------------------------------------------------------------------------------------------------------------------
-
- ```sh
+## Code  Example
 
 
+Below is a model table for mysql backend db creation
 
+```Javascript
+
+const { Model, DataTypes } = require("sequelize");
+const sequelize = require("../config/connection");
+
+
+class Favorite extends Model { }
+
+Favorite.init(
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    user_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: "user",
+        key: "id",
+
+        unique: false
+
+      },
+    },
+    recipe_id: { //foreign key
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      references: {
+        model: 'recipe',
+        key: 'id',
+        unique: false
+      }
+
+    }
+  },
+
+  {
+    sequelize,
+    timestamps: false,
+    freezeTableName: true,
+    underscored: true,
+    modelName: "favorite",
+  }
+);
+
+module.exports = Favorite;
 
 ```
 
-**(ABOVE)- 
+Below is the CSS for the homepage
 
---------------------------------------------------------------------------------------------------------------------------------------------------------
+``` CSS
 
-```sh
-    
+#cuisine-list {
+  list-style: none;
+  padding: 0;
+  width: 200px;
+}
 
- 
+#cuisine-list li {
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+#cuisine-list li:hover {
+  background-color: lightgray;
+}
+
+#cuisine-list li::before {
+  content: '\25B6';
+  margin-right: 5px;
+}
+
+.recipe-container {
+  transition: background-color 0.3s;
+
+}
+
+.recipe-container:hover {
+  border-right: 1em solid #656565;
+  background-color: rgba(126, 126, 126, 0.2);
+  border-radius: 0.5em;
+
+}
+
+
+body {
+  background: linear-gradient(to left, rgba(255, 255, 255, 0) 0%, rgb(213 181 146) 100%),
+    url(./images/dish-pick.png) center center no-repeat;
+  background-size: cover;
+}
+
+
+``` 
+This is the controller which deletes a favorite. It looks for auth, searches the db, deletes the favorite and cascades the changes to the rest of the table.  It has error handling and updates the page removing the favorite and the button.
+
+```Javascript
+
+
+router.delete('/:spoon_id', withAuth, async (req, res) => {
+  const recipeData = await Recipe.findOne({ where: { spoon_id: req.body.spoon_id } });
+  const recipe = recipeData.get({ plain: true });
+
+  Favorite.destroy({
+    where: {
+      id: recipe.id,
+      user_id: req.session.user_id,
+    },
+  })
+    .then((recipeData) => {
+      if (!recipeData) {
+        res.status(404).json({ message: 'No favorite with this parameters' });
+        return;
+      }
+      res.json(recipeData);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(err);
+    });
+});
+
 ```
 
-**(ABOVE)- 
 
---------------------------------------------------------------------------------------------------------------------------------------------------------
+## Usage 
 
-```sh
+You just need to head on over to the deployed app at https://recipesbox.herokuapp.com/. Once you Sign Up you will be able to veiw recipes and save them to your favorites Dashboard.  
 
 
-    
+## Learning Points 
+
+
+Learned so much, learned to work as a team, learned better git practices, learned to communnicate in a more effective manner.  Learned to manage disagreements.  Learned how to use GreenSock to animate, learned so many different ways to test and implement code.  We all worked super hard and are our proud of the product we were able to produce.  
+
+
+## Authors Info
+
+The Curiosity Crusaders!  Turning questions into Quality Code.
+
+* [Github](https://github.com/LiubovSobolevskaya)
+* [Github](https://github.com/Berkeleycodingmomma)
+* [Github](https://github.com/bdalberson)
 ```
-
-**(ABOVE)- 
-
---------------------------------------------------------------------------------------------------------------------------------------------------------
-
-```sh
-  
-
-
-```
-**(ABOVE)- T
-
---------------------------------------------------------------------------------------------------------------------------------------------------------
-
-## Author's Names
-
-### Amanda Gray, Liubov Sobolevskaya, Brian Alberson
-
-* [Github]()
 
 ## Credits
 
-Shout out to all the TA's and Google Search!
+Many thanks to everyone who helped get us across the line for this one.  And to all the teammates for working super hard and putting the project first.    
 
-GOOGLE!  Seriously, thank you google search!
+---
 
-
-
-© 2023 edX Boot Camps LLC. Confidential and Proprietary. All Rights Reserved.
-
+## Tests
+Tested the UI and user cases,  ran functional testing integratin tests to verify quality and consistency. We didn't have any time to build any unit tests but that would be a next step for future development.  
 
 
 

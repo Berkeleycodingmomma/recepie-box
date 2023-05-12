@@ -2,10 +2,12 @@
 
   <h1 id="dish-title">{{result.title}}</h1>
   <img id="dish-pic" src={{result.imgSource}} alt='picture of a dish' />
-  Servings: {{result.servings}}<br />
-  Time to cook: {{result.readyInMinutes}} minutes.
+
+  <h2>Servings: {{result.servings}}</h2>
+
+  <h2>Time to cook: {{result.readyInMinutes}} minutes.</h2>
   {{#if result.instructions }}
-  <div>
+  <div class="instructions">
     <h2>Instructions</h2>
     <ol>
       {{#each result.instructions as |instruction|}}
@@ -18,23 +20,36 @@
   {{/if}}
   <div>
     <h2>Ingredients</h2>
-    <ul>
+    <table>
+      <tr>
+        <th class="ingredient-column">Ingredient</th>
+        <th class="amount-column">Amount</th>
+      </tr>
       {{#each result.ingredients as |ingredient|}}
-      <li>
-        {{ingredient.name}} {{ingredient.amount}} {{ingredient.unit}}
-      </li>
+      <tr>
+        <td>{{ingredient.name}}</td>
+        <td>{{ingredient.amount}} {{ingredient.unit}}</td>
+      </tr>
       {{/each}}
-      <ul>
+    </table>
   </div>
   <div>
     <h2>Nutrients</h2>
-    <ul id="dish-nutr">
+    <table id="dish-nutr">
+      <tr>
+        <th class="nutrient-column">Name</th>
+        <th class="nutrient-column">Amount</th>
+        <th class="nutrient-column">% of Daily Needs</th>
+      </tr>
       {{#each result.nutrients as |nutrient|}}
-      <li>
-        {{nutrient.name}} {{nutrient.amount}} {{nutrient.unit}} {{nutrient.percentOfDailyNeeds}}%
-      </li>
+      <tr>
+        <td class="nutrient-column">{{nutrient.name}}</td>
+        <td class="nutrient-column">{{nutrient.amount}} {{nutrient.unit}}</td>
+        <td class="nutrient-column">{{nutrient.percentOfDailyNeeds}}%</td>
+      </tr>
       {{/each}}
-    </ul>
+    </table>
+
   </div>
 
   {{#unless favorite}}

@@ -20,12 +20,14 @@ async function addToFavesHandler() {
             break; // Exit the loop since we found the desired row
         }
     }
+    // if for some reason this information was not fetched from Spoonacular for somereason, just set it to null;
     if (!calories) {
         calories = null;
     }
+    // Get the name and picture source from the HTML elements
     const name = document.getElementById('dish-title').textContent;
     const picture_source = document.getElementById('dish-pic').src;
-
+    // Send a POST request to the API endpoint with the recipe data
     const response = await fetch(`/api/recipes/`, {
         method: 'POST',
         body: JSON.stringify({
@@ -38,16 +40,15 @@ async function addToFavesHandler() {
             'Content-Type': 'application/json',
         },
     });
-
+    // Check if the response is successful
     if (response.ok) {
+        // Redirect to the dashboard if the request is successful
         document.location.replace('/dashboard');
     } else {
         // Display an alert with the error message
         alert(response.statusText);
     }
 }
-
-
 
 
 const addToFavorites = document.getElementById('add-to-favorites');

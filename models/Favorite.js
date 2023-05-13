@@ -12,7 +12,7 @@ Favorite.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    user_id: {
+    user_id: {//foreign key
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {

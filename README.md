@@ -1,18 +1,171 @@
 # Recepie-Box
-#
-# 
-#
+
 ## Description 
-#
-Unlock the Secrets of Flavorful Delights! With this intuitive app you will be able to search out countless recipes oranized by cusine type and save your favorites for easy access to top notch recipies from aroud the globe. 
+This is an application that allows users to search for and save their favorite recipes. Users can create an account, search for recipes by cuisine, save recipes to their dashboard, and view details about each recipe such as cooking instructions and nutritional information. The application uses a MySQL database and the Spoonacular API to access recipe information. Users can also remove recipes from their dashboard if they no longer want to see them.
 
-#
-## Beautiful Image
-#
+## Appearance and functionality
+<img src="./assets/main.gif" alt="plot" width="600px" />
 
-![plot](./assets/photo.png)
+## Example of User Story
 
-#
+<span style="font-family: Courier New;">
+I want to be able to save my favorite recipes to my dashboard.<br/>
+I can easy access them without looking them up.
+</span>
+
+<img src="./assets/addToFavorite.gif" alt="plot" width="600px" />
+
+This is a /api/recipe route that waits for a request to add a recipe first to the Recipe table, if it wasn't already and then to the Favorite table. 
+```Javascript
+//This creates a new recipe with auth user
+router.post("/", withAuth, async (req, res) => {
+
+  const recipeData = await Recipe.findOne({ where: { spoon_id: req.body.spoon_id } });
+
+  if (!recipeData) {
+    // If recipeData is not found, add the recipe to the Recipe database
+    try {
+      const newRecipe = await Recipe.create({
+        ...req.body,
+      });
+      // Create a new favorite record for the user and the newly created recipe
+      const newFavorite = await Favorite.create({
+        user_id: req.session.user_id,
+        recipe_id: newRecipe.id
+      });
+      // Return the newly created favorite as a JSON response with a 200 status code
+      res.status(200).json(newFavorite);
+
+    } catch (err) {
+      // If an error occurs during recipe or favorite creation, return the error as a JSON response with a 400 status code
+      res.status(400).json(err);
+    }
+  }
+  else {
+    // If recipeData is found, use the existing recipe
+    const recipe = recipeData.get({ plain: true });
+    try {
+      // Create a new favorite record for the user and the existing recipe
+      const newFavorite = await Favorite.create({
+        user_id: req.session.user_id,
+        recipe_id: recipe.id
+
+      });
+      // Return the newly created favorite as a JSON response with a 200 status code
+      res.status(200).json(newFavorite);
+    } catch (err) {
+      // If an error occurs during favorite creation, return the error as a JSON response with a 400 status code
+      res.status(400).json(err);
+    }
+  }
+
+});
+```
+
+## Model Creation
+
+Since this application only stores Users, Recipes and their many-to-many assciations, this is the picture of the data base and code snippet of one of the tables: 
+
+<img src="./assets/mySQLstructure.png" alt="plot" width="600px" />
+
+
+```Javascript
+const { Model, DataTypes } = require("sequelize");
+const sequelize = require("../config/connection");
+
+
+class Favorite extends Model { }
+
+Favorite.init(
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    user_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: "user",
+        key: "id",
+        unique: false
+      },
+    },
+    recipe_id: { //foreign key
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      references: {
+        model: 'recipe',
+        key: 'id',
+        unique: false
+      }
+    }
+  },
+
+  {
+    sequelize,
+    timestamps: false,
+    freezeTableName: true,
+    underscored: true,
+    modelName: "favorite",
+  }
+);
+```
+
+## Third party API 
+
+<img src="./assets/spoonacular.png" alt="plot" width="600px" />
+
+We used spoonacular APi to get disched by cuisine. 
+
+```Javascript
+const queryURL = `https://api.spoonacular.com/recipes/complexSearch?&cuisine=${cuisine}&apiKey=${API_KEY}`
+```
+
+Along with other information this request returns a ```spoon_id``` that allows you to retrieve more information using separate API rquests:
+
+```Javascript
+ const instructionsURL = `https://api.spoonacular.com/recipes/${id}/analyzedInstructions?apiKey=${API_KEY}`;
+ const nutritionURL = `https://api.spoonacular.com/recipes/${id}/nutritionWidget.json?apiKey=${API_KEY}`;
+ const infoURL = `https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_KEY}`;
+```
+
+<img src="./assets/thirdPartyAPI.gif" alt="plot" width="600px" />
+
+## CSS framework 
+We primarily relied on standard CSS and flexboxes to manage various screen sizes.
+
+<img src="./assets/different-screen-size.gif" alt="plot" width="600px" />
+
+## Usage 
+
+You just need to head on over to the deployed app at [Recipe Box](https://recipesbox.herokuapp.com/). Once you Sign Up you will be able to veiw recipes and save them to your favorites Dashboard.  
+
+
+## Learning Points 
+
+Learned so much, learned to work as a team, learned better git practices, learned to communnicate in a more effective manner.  Learned to manage disagreements.  Learned how to use GreenSock to animate, learned so many different ways to test and implement code.  We all worked super hard and are our proud of the product we were able to produce.  
+
+## Authors Info
+
+The Curiosity Crusaders!  Turning questions into Quality Code.
+
+* [Liubov Sobolevskaya](https://github.com/LiubovSobolevskaya)
+* [Amanda Grey](https://github.com/Berkeleycodingmomma)
+* [Brian Alberson](https://github.com/bdalberson)
+
+
+## Credits
+
+Many thanks to everyone who helped get us across the line for this one.  And to all the teammates for working super hard and putting the project first.    
+
+---
+
+## Tests
+Tested the UI and user cases,  ran functional testing integratin tests to verify quality and consistency. We didn't have any time to build any unit tests but that would be a next step for future development.  
+
 ## Built With:
 - JSON:[ JSON](https://www.npmjs.com/package/json)
 - Dynamic JavaScript
@@ -34,171 +187,6 @@ Unlock the Secrets of Flavorful Delights! With this intuitive app you will be ab
 - Nodemon: [Website](https://www.npmjs.com/package/nodemon) 
 
 
-
-
-
-## Code  Example
-
-
-Below is a model table for mysql backend db creation
-
-```Javascript
-
-const { Model, DataTypes } = require("sequelize");
-const sequelize = require("../config/connection");
-
-
-class Favorite extends Model { }
-
-Favorite.init(
-  {
-    id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      primaryKey: true,
-      autoIncrement: true,
-    },
-    user_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: "user",
-        key: "id",
-
-        unique: false
-
-      },
-    },
-    recipe_id: { //foreign key
-      type: DataTypes.INTEGER,
-      allowNull: true,
-      references: {
-        model: 'recipe',
-        key: 'id',
-        unique: false
-      }
-
-    }
-  },
-
-  {
-    sequelize,
-    timestamps: false,
-    freezeTableName: true,
-    underscored: true,
-    modelName: "favorite",
-  }
-);
-
-module.exports = Favorite;
-
-```
-
-Below is the CSS for the homepage
-
-``` CSS
-
-#cuisine-list {
-  list-style: none;
-  padding: 0;
-  width: 200px;
-}
-
-#cuisine-list li {
-  margin-bottom: 10px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-#cuisine-list li:hover {
-  background-color: lightgray;
-}
-
-#cuisine-list li::before {
-  content: '\25B6';
-  margin-right: 5px;
-}
-
-.recipe-container {
-  transition: background-color 0.3s;
-
-}
-
-.recipe-container:hover {
-  border-right: 1em solid #656565;
-  background-color: rgba(126, 126, 126, 0.2);
-  border-radius: 0.5em;
-
-}
-
-
-body {
-  background: linear-gradient(to left, rgba(255, 255, 255, 0) 0%, rgb(213 181 146) 100%),
-    url(./images/dish-pick.png) center center no-repeat;
-  background-size: cover;
-}
-
-
-``` 
-This is the controller which deletes a favorite. It looks for auth, searches the db, deletes the favorite and cascades the changes to the rest of the table.  It has error handling and updates the page removing the favorite and the button.
-
-```Javascript
-
-
-router.delete('/:spoon_id', withAuth, async (req, res) => {
-  const recipeData = await Recipe.findOne({ where: { spoon_id: req.body.spoon_id } });
-  const recipe = recipeData.get({ plain: true });
-
-  Favorite.destroy({
-    where: {
-      id: recipe.id,
-      user_id: req.session.user_id,
-    },
-  })
-    .then((recipeData) => {
-      if (!recipeData) {
-        res.status(404).json({ message: 'No favorite with this parameters' });
-        return;
-      }
-      res.json(recipeData);
-    })
-    .catch((err) => {
-      console.log(err);
-      res.status(500).json(err);
-    });
-});
-
-```
-
-
-## Usage 
-
-You just need to head on over to the deployed app at https://recipesbox.herokuapp.com/. Once you Sign Up you will be able to veiw recipes and save them to your favorites Dashboard.  
-
-
-## Learning Points 
-
-
-Learned so much, learned to work as a team, learned better git practices, learned to communnicate in a more effective manner.  Learned to manage disagreements.  Learned how to use GreenSock to animate, learned so many different ways to test and implement code.  We all worked super hard and are our proud of the product we were able to produce.  
-
-
-## Authors Info
-
-The Curiosity Crusaders!  Turning questions into Quality Code.
-
-* [Github](https://github.com/LiubovSobolevskaya)
-* [Github](https://github.com/Berkeleycodingmomma)
-* [Github](https://github.com/bdalberson)
-```
-
-## Credits
-
-Many thanks to everyone who helped get us across the line for this one.  And to all the teammates for working super hard and putting the project first.    
-
----
-
-## Tests
-Tested the UI and user cases,  ran functional testing integratin tests to verify quality and consistency. We didn't have any time to build any unit tests but that would be a next step for future development.  
 
 
 

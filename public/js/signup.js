@@ -1,11 +1,12 @@
-//This is the signup request
+// Signup form handler
 const recipeSignupFormHandler = async (event) => {
     event.preventDefault();
-
+    // Get the username and password from the signup form
     const username = document.querySelector('#username').value.trim();
     const password = document.querySelector('#password').value.trim();
-
+    // Check if both username and password are provided
     if (username && password) {
+        // Send a POST request to the signup API endpoint
         const response = await fetch('/api/users/signup', {
             method: 'POST',
             body: JSON.stringify({
@@ -17,11 +18,13 @@ const recipeSignupFormHandler = async (event) => {
             },
         });
 
-        // When successful, load the homepage
+        // Check if the response is successful
         if (response.ok) {
+            // Redirect to the dashboard if the signup request is successful
             document.location.replace('/dashboard');
         } else {
-            alert('Failed to sign up.'); // When unsuccessful, show alert
+            // If the signup request was unsuccessful, show an alert
+            alert('Failed to sign up.');
         }
     }
 };

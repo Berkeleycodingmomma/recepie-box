@@ -11,11 +11,12 @@ const recipeLogout = async () => {
     if (response.ok) {
         document.location.replace('/');
     } else {
-        alert('Failed to log out.'); // When unsuccessful, show alert
+        // When unsuccessful, show alert
+        alert('Failed to log out.');
     }
 };
 
-//I added an event listner to the logout button
+//event listner to the logout 
 const recipeLogoutButton = document.querySelector('#recipe-logout');
 if (recipeLogoutButton) {
     recipeLogoutButton.addEventListener('click', recipeLogout);

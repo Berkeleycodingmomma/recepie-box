@@ -1,15 +1,19 @@
-<h1 class="dashboard ">My Favorite Recipes</h1>
-<div class="fav-container mt-5">
-  <div id="recipes-container">
-    {{#each favoriteDishes as |dish|}}
-    <div class="card-header">
-      <a class="card-link" href="/recipe/{{dish.spoon_id}}">{{dish.name}}</a>
+<div class="dashboard">
+  <div>
+    <h1 class="dashboard-title">My Favorite Recipes</h1>
+  </div>
+  <div class="fav-container mt-5">
+    <div id="recipes-container">
+      {{#each favoriteDishes as |dish|}}
+      <div class="card-header">
+        <a class="card-link" href="/recipe/{{dish.spoon_id}}">{{dish.name}}</a>
+      </div>
+      <div class="card-body-dashboard">
+        <img src={{dish.picture_source}} alt="picture of a dish" />
+        <p style="color: white;">{{dish.calories}} Calories</p>
+        <button data-id="{{dish.spoon_id}}" class="remove-button">Remove from Favorites</button>
+      </div>
+      {{/each}}
     </div>
-    <div class="card-body-dashboard">
-      <img src={{dish.picture_source}} alt="picture of a dish" />
-      <p style="color: white;">{{dish.calories}} Calories</p>
-      <button data-id="{{dish.spoon_id}}" class="remove-button">Remove from Favorites</button>
-    </div>
-    {{/each}}
   </div>
 </div>
